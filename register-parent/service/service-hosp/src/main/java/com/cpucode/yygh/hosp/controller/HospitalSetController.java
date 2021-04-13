@@ -161,7 +161,6 @@ public class HospitalSetController {
     "id": 1
 }
      */
-
     /**
      * 修改医院设置
      * @param hospitalSet
@@ -177,5 +176,19 @@ public class HospitalSetController {
         } else {
             return Result.fail();
         }
+    }
+
+    /**
+     * 批量删除医院设置
+     *
+     * @param idList
+     * @return
+     */
+    @ApiOperation(value = "批量删除医院设置")
+    @DeleteMapping("batchRemove")
+    public Result batchRemoveHospitalSet(@RequestBody List<Long> idList) {
+        hospitalSetService.removeByIds(idList);
+
+        return Result.ok();
     }
 }
