@@ -1,11 +1,16 @@
 package com.cpucode.yygh.hosp.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cpucode.yygh.common.result.Result;
 import com.cpucode.yygh.hosp.service.HospitalSetService;
 import com.cpucode.yygh.model.hosp.HospitalSet;
+import com.cpucode.yygh.vo.hosp.HospitalSetQueryVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -58,6 +63,42 @@ public class HospitalSetController {
         } else {
             return Result.fail();
         }
+    }
+
+    /**
+     * 条件查询带分页
+     * @param current   传递当前页
+     * @param limit     每页记录数
+     * @param hospitalSetQueryVo
+     * @return
+     */
+    @PostMapping("findPageHospSet/{current}/{limit}")
+    public Result findPageHospSet(@PathVariable long current,
+                                  @PathVariable long limit,
+                                  @RequestBody(required = false) HospitalSetQueryVo hospitalSetQueryVo) {
+        //创建page对象，传递当前页，每页记录数
+        Page<HospitalSet> page = new Page<>(current,limit);
+
+        //构建条件
+        QueryWrapper<HospitalSet> wrapper = new QueryWrapper<>();
+
+        //医院名称
+        String hosname = hospitalSetQueryVo.getHosname();
+        //医院编号
+        String hoscode = hospitalSetQueryVo.getHoscode();
+
+        if(!StringUtils.isEmpty(hosname)) {
+            wrapper.like("hosname", hosname);
+        }
+        if(!StringUtils.isEmpty(hoscode)) {
+            wrapper.eq("hoscode", hoscode);
+        }
+
+        //调用方法实现分页查询
+        IPage<HospitalSet> pageHospitalSet = hospitalSetService.page(page, wrapper);
+
+        //返回结果
+        return Result.ok(pageHospitalSet);
 
     }
 
