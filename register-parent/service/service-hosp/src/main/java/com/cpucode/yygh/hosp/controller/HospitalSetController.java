@@ -212,4 +212,22 @@ public class HospitalSetController {
         return Result.ok();
     }
 
+    /**
+     *发送签名秘钥
+     * @param id
+     * @return
+     */
+    @ApiOperation(value = "发送签名秘钥")
+    @PutMapping("sendKey/{id}")
+    public Result lockHospitalSet(@PathVariable Long id) {
+        HospitalSet hospitalSet = hospitalSetService.getById(id);
+
+        String signKey = hospitalSet.getSignKey();
+        String hoscode = hospitalSet.getHoscode();
+
+        //TODO 发送短信
+
+        return Result.ok();
+    }
+
 }
