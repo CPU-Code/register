@@ -153,4 +153,29 @@ public class HospitalSetController {
 
         return Result.ok(hospitalSet);
     }
+
+
+    /**
+{
+    "hosname": "中日友好医院",
+    "id": 1
+}
+     */
+
+    /**
+     * 修改医院设置
+     * @param hospitalSet
+     * @return
+     */
+    @ApiOperation(value = "修改医院设置")
+    @PostMapping("updateHospitalSet")
+    public Result updateHospitalSet(@RequestBody HospitalSet hospitalSet) {
+        boolean flag = hospitalSetService.updateById(hospitalSet);
+
+        if(flag) {
+            return Result.ok();
+        } else {
+            return Result.fail();
+        }
+    }
 }
