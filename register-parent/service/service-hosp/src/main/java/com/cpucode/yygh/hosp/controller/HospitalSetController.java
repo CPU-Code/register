@@ -141,4 +141,16 @@ public class HospitalSetController {
         }
     }
 
+    /**
+     * 根据id获取医院设置
+     * @param id
+     * @return
+     */
+    @ApiOperation(value = "根据id获取医院设置")
+    @GetMapping("getHospSet/{id}")
+    public Result getHospSet(@PathVariable Long id) {
+        HospitalSet hospitalSet = hospitalSetService.getById(id);
+
+        return Result.ok(hospitalSet);
+    }
 }
