@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cpucode.yygh.common.result.Result;
+import com.cpucode.yygh.common.utils.MD5;
 import com.cpucode.yygh.hosp.service.HospitalSetService;
 import com.cpucode.yygh.model.hosp.HospitalSet;
 import com.cpucode.yygh.vo.hosp.HospitalSetQueryVo;
@@ -14,6 +15,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * @author : cpucode
@@ -49,6 +51,7 @@ public class HospitalSetController {
 
     /**
      * 逻辑删除医院设置
+     *  http://localhost:8201/swagger-ui.html
      *
      * @param id
      * @return
@@ -72,6 +75,7 @@ public class HospitalSetController {
      * @param hospitalSetQueryVo
      * @return
      */
+    @ApiOperation(value = "条件查询带分页")
     @PostMapping("findPageHospSet/{current}/{limit}")
     public Result findPageHospSet(@PathVariable long current,
                                   @PathVariable long limit,
@@ -99,7 +103,42 @@ public class HospitalSetController {
 
         //返回结果
         return Result.ok(pageHospitalSet);
+    }
 
+    /**
+{
+    "apiUrl": "923992029",
+    "contactsName": "cpucode",
+    "contactsPhone": "1101",
+    "hoscode": "1001",
+    "hosname": "湘雅",
+    "isDeleted": 0
+}
+     */
+    /**
+     * 添加医院设置
+     *
+     * @param hospitalSet
+     * @return
+     */
+    @ApiOperation(value = "添加医院设置")
+    @PostMapping("saveHospitalSet")
+    public Result saveHospitalSet(@RequestBody HospitalSet hospitalSet) {
+        //设置状态 1 使用 0 不能使用
+        hospitalSet.setStatus(1);
+
+        //签名秘钥
+        Random random = new Random();
+        hospitalSet.setSignKey(MD5.encrypt(System.currentTimeMillis()+""+random.nextInt(1000)));
+
+        //调用service
+        boolean save = hospitalSetService.save(hospitalSet);
+
+        if(save) {
+            return Result.ok();
+        } else {
+            return Result.fail();
+        }
     }
 
 }
