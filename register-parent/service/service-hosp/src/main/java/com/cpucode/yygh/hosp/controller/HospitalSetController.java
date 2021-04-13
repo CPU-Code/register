@@ -159,7 +159,6 @@ public class HospitalSetController {
             throw new YyghException("失败",201);
         }*/
 
-
         return Result.ok(hospitalSet);
     }
 
