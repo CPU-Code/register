@@ -1,5 +1,6 @@
 package com.cpucode.yygh.hosp.controller;
 
+import com.cpucode.yygh.common.result.Result;
 import com.cpucode.yygh.hosp.service.HospitalSetService;
 import com.cpucode.yygh.model.hosp.HospitalSet;
 import io.swagger.annotations.Api;
@@ -35,10 +36,10 @@ public class HospitalSetController {
      */
     @ApiOperation(value = "获取所有医院设置")
     @GetMapping("findAll")
-    public List<HospitalSet> findAllHospitalSet() {
+    public Result findAllHospitalSet() {
         List<HospitalSet> list = hospitalSetService.list();
 
-        return list;
+        return Result.ok(list);
     }
 
     /**
@@ -49,10 +50,15 @@ public class HospitalSetController {
      */
     @ApiOperation(value = "逻辑删除医院设置")
     @DeleteMapping("{id}")
-    public boolean removeHospSet(@PathVariable Long id) {
-        boolean b = hospitalSetService.removeById(id);
+    public Result removeHospSet(@PathVariable Long id) {
+        boolean flag = hospitalSetService.removeById(id);
 
-        return b;
+        if(flag) {
+            return Result.ok();
+        } else {
+            return Result.fail();
+        }
+
     }
 
 }
