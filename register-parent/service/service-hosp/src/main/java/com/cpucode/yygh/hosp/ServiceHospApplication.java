@@ -2,6 +2,7 @@ package com.cpucode.yygh.hosp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @author : cpucode
@@ -10,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @github : https://github.com/CPU-Code
  * @csdn : https://blog.csdn.net/qq_44226094
  */
+@ComponentScan(basePackages = "com.cpucode")
 @SpringBootApplication
 public class ServiceHospApplication {
     public static void main(String[] args) {
