@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/register.iml" filepath="$PROJECT_DIR$/.idea/register.iml" />
+      <module fileurl="file://$PROJECT_DIR$/register-parent/common/common.iml" filepath="$PROJECT_DIR$/register-parent/common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/register-parent/common/common-util/common-util.iml" filepath="$PROJECT_DIR$/register-parent/common/common-util/common-util.iml" />
       <module fileurl="file://$PROJECT_DIR$/register-parent/register-parent.iml" filepath="$PROJECT_DIR$/register-parent/register-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/register-parent/common/service-util/service-util.iml" filepath="$PROJECT_DIR$/register-parent/common/service-util/service-util.iml" />
     </modules>
   </component>
 </project>
