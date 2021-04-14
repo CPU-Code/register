@@ -10,6 +10,7 @@
       <module fileurl="file://$PROJECT_DIR$/register-parent/service/service-hosp/service-hosp.iml" filepath="$PROJECT_DIR$/register-parent/service/service-hosp/service-hosp.iml" />
       <module fileurl="file://$PROJECT_DIR$/register-parent/service/service-user/service-user.iml" filepath="$PROJECT_DIR$/register-parent/service/service-user/service-user.iml" />
       <module fileurl="file://$PROJECT_DIR$/register-parent/common/service-util/service-util.iml" filepath="$PROJECT_DIR$/register-parent/common/service-util/service-util.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vue-register-parent/vue-register-parent.iml" filepath="$PROJECT_DIR$/vue-register-parent/vue-register-parent.iml" />
     </modules>
   </component>
 </project>
