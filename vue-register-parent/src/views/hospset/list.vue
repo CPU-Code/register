@@ -2,6 +2,17 @@
   <div class="app-container">
     医院设置列表
 
+    <!-- 表单查询 -->
+    <el-form :inline="true" class="demo-form-inline">
+      <el-form-item>
+        <el-input  v-model="searchObj.hosname" placeholder="医院名称"/>
+      </el-form-item>
+      <el-form-item>
+        <el-input v-model="searchObj.hoscode" placeholder="医院编号"/>
+      </el-form-item>
+      <el-button type="primary" icon="el-icon-search" @click="getList()">查询</el-button>
+    </el-form>
+
     <!-- banner列表 -->
     <el-table :data="list" stripe style="width: 100%">
 
