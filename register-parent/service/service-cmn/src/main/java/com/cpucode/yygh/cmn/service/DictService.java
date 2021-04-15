@@ -2,6 +2,7 @@ package com.cpucode.yygh.cmn.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.cpucode.yygh.model.cmn.Dict;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -24,4 +25,10 @@ public interface DictService extends IService<Dict> {
      * @param response
      */
     void exportData(HttpServletResponse response);
+
+    /**
+     * 导入数据字典
+     * @param file
+     */
+    void importDictData(MultipartFile file);
 }

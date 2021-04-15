@@ -3,12 +3,15 @@ package com.cpucode.yygh.cmn.service.impl;
 import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.cpucode.yygh.cmn.listener.DictListener;
 import com.cpucode.yygh.cmn.mapper.DictMapper;
 import com.cpucode.yygh.cmn.service.DictService;
 import com.cpucode.yygh.model.cmn.Dict;
 import com.cpucode.yygh.vo.cmn.DictEeVo;
 import org.springframework.beans.BeanUtils;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -26,6 +29,22 @@ import java.util.List;
  */
 @Service
 public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements DictService {
+
+    /**
+     * 导入数据字典
+     * @param file
+     */
+    @Override
+    @CacheEvict(value = "dict", allEntries=true)
+    public void importDictData(MultipartFile file) {
+        try {
+            EasyExcel.read(file.getInputStream(),
+                    DictEeVo.class,
+                    new DictListener(baseMapper)).sheet().doRead();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * 导出数据字典接口
