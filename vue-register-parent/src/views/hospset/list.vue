@@ -40,6 +40,11 @@
         <template slot-scope="scope">
           <el-button type="danger" size="mini"
                      icon="el-icon-delete" @click="removeDataById(scope.row.id)">删除</el-button>
+          <el-button v-if="scope.row.status==1" type="primary" size="mini"
+                     icon="el-icon-delete" @click="lockHostSet(scope.row.id,0)">锁定</el-button>
+          <el-button v-if="scope.row.status==0" type="danger" size="mini"
+                     icon="el-icon-delete" @click="lockHostSet(scope.row.id,1)">取消锁定</el-button>
+
         </template>
       </el-table-column>
 
@@ -79,6 +84,14 @@ export default {
         this.getList()
    },
    methods: {//定义方法，进行请求接口调用
+     //锁定和取消锁定
+     lockHostSet(id,status) {
+       hospset.lockHospSet(id,status)
+         .then(response => {
+           //刷新
+           this.getList()
+         })
+     },
      //批量删除
      removeRows() {
        this.$confirm('此操作将永久删除医院是设置信息, 是否继续?', '提示', {
