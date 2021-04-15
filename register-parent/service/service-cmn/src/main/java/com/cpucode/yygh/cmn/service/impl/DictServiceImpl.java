@@ -34,6 +34,7 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
         for (Dict dict:dictList) {
             Long dictId = dict.getId();
             boolean isChild = this.isChildren(dictId);
+
             dict.setHasChildren(isChild);
         }
         return dictList;
