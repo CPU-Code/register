@@ -8,5 +8,13 @@ export default {
       method: 'post',
       data: searchObj  // 使用json
     })
+  },
+  //删除医院设置
+  deleteHospSet(id) {
+    return request ({
+      url: `/admin/hosp/hospitalSet/removeHospSet/${id}`,
+      method: 'delete'
+    })
   }
+
 }

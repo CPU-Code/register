@@ -59,7 +59,7 @@ public class HospitalSetController {
      * @return
      */
     @ApiOperation(value = "逻辑删除医院设置")
-    @DeleteMapping("{id}")
+    @DeleteMapping("removeHospSet/{id}")
     public Result removeHospSet(@PathVariable Long id) {
         boolean flag = hospitalSetService.removeById(id);
 
