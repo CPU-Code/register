@@ -13,9 +13,16 @@
       <el-button type="primary" icon="el-icon-search" @click="getList()">查询</el-button>
     </el-form>
 
-    <!-- banner列表 -->
-    <el-table :data="list" stripe style="width: 100%">
+    <!-- 工具条 -->
+    <div>
+      <el-button type="danger" size="mini" @click="removeRows()">批量删除</el-button>
+    </div>
 
+
+    <!-- banner列表 -->
+    <el-table :data="list" stripe style="width: 100%" @selection-change="handleSelectionChange">
+
+      <el-table-column type="selection" width="55"/>
       <el-table-column type="index" label="序号" width="50"/>
       <el-table-column prop="hosname" label="医院名称"/>
       <el-table-column prop="hoscode" label="医院编号"/>
@@ -72,7 +79,41 @@ export default {
         this.getList()
    },
    methods: {//定义方法，进行请求接口调用
-      //医院设置列表
+     //批量删除
+     removeRows() {
+       this.$confirm('此操作将永久删除医院是设置信息, 是否继续?', '提示', {
+         confirmButtonText: '确定',
+         cancelButtonText: '取消',
+         type: 'warning'
+       }).then(() => { //确定执行then方法
+         var idList = []
+
+         //遍历数组得到每个id值，设置到idList里面
+         for(var i=0; i<this.multipleSelection.length; i++) {
+           var obj = this.multipleSelection[i]
+           var id = obj.id
+
+           idList.push(id)
+         }
+
+         //调用接口
+         hospset.batchRemoveHospSet(idList)
+           .then(response => {
+             //提示
+             this.$message({
+               type: 'success',
+               message: '删除成功!'
+             })
+             //刷新页面
+             this.getList(1)
+           })
+       })
+     },
+     // 当表格复选框选项发生变化的时候触发
+     handleSelectionChange(selection) {
+       this.multipleSelection = selection
+     },
+     //医院设置列表
       getList(page=1) { //添加当前页参数
         this.current = page
          hospset.getHospSetList(this.current,this.limit,this.searchObj)
