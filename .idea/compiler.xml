@@ -12,12 +12,14 @@
         <module name="common-util" />
         <module name="model" />
         <module name="service-cmn" />
+        <module name="hospital-manage" />
         <module name="service-util" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="common" target="1.8" />
       <module name="common-util" target="1.8" />
+      <module name="hospital-manage" target="1.8" />
       <module name="model" target="1.8" />
       <module name="register-parent" target="1.8" />
       <module name="service" target="1.8" />
@@ -31,6 +33,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="common" options="-parameters" />
       <module name="common-util" options="-parameters" />
+      <module name="hospital-manage" options="-parameters" />
       <module name="model" options="-parameters" />
       <module name="register-parent" options="" />
       <module name="service-cmn" options="-parameters" />
