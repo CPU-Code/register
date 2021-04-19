@@ -1,5 +1,7 @@
 package com.cpucode.yygh.hosp.service;
 
+import com.cpucode.yygh.model.hosp.Hospital;
+
 import java.util.Map;
 
 /**
@@ -15,4 +17,12 @@ public interface HospitalService {
      * @param paramMap
      */
     void save(Map<String, Object> paramMap);
+
+    /**
+     * 实现根据医院编号查询
+     * @param hoscode
+     * @return
+     */
+    Hospital getByHoscode(String hoscode);
+
 }
