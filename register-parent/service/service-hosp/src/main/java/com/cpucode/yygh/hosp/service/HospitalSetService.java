@@ -11,4 +11,10 @@ import com.cpucode.yygh.model.hosp.HospitalSet;
  * @csdn : https://blog.csdn.net/qq_44226094
  */
 public interface HospitalSetService extends IService<HospitalSet> {
+    /**
+     * 获取签名key
+     * @param hoscode
+     * @return
+     */
+    String getSignKey(String hoscode);
 }
