@@ -8,10 +8,14 @@ import com.cpucode.yygh.common.utils.MD5;
 import com.cpucode.yygh.hosp.service.DepartmentService;
 import com.cpucode.yygh.hosp.service.HospitalService;
 import com.cpucode.yygh.hosp.service.HospitalSetService;
+import com.cpucode.yygh.model.hosp.Department;
 import com.cpucode.yygh.model.hosp.Hospital;
+import com.cpucode.yygh.vo.hosp.DepartmentQueryVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,6 +42,40 @@ public class ApiController {
 
     @Autowired
     private DepartmentService departmentService;
+
+    /**
+     * 查询科室接口
+     * @param request
+     * @return
+     */
+    @ApiOperation(value = "获取分页列表")
+    @PostMapping("department/list")
+    public Result department(HttpServletRequest request) {
+        //获取传递过来科室信息
+        Map<String, String[]> requestMap = request.getParameterMap();
+        Map<String, Object> paramMap = HttpRequestHelper.switchMap(requestMap);
+
+        //医院编号
+        String hoscode = (String)paramMap.get("hoscode");
+        //当前页 和 每页记录数
+        int page = StringUtils.isEmpty(paramMap.get("page")) ? 1 : Integer.parseInt((String)paramMap.get("page"));
+        int limit = StringUtils.isEmpty(paramMap.get("limit")) ? 1 : Integer.parseInt((String)paramMap.get("limit"));
+        //TODO 签名校验
+        if(StringUtils.isEmpty(hoscode)) {
+            throw new YyghException(ResultCodeEnum.PARAM_ERROR);
+        }
+        //签名校验
+        if(!HttpRequestHelper.isSignEquals(paramMap, hospitalSetService.getSignKey(hoscode))) {
+            throw new YyghException(ResultCodeEnum.SIGN_ERROR);
+        }
+
+
+        DepartmentQueryVo departmentQueryVo = new DepartmentQueryVo();
+        departmentQueryVo.setHoscode(hoscode);
+        //调用service方法
+        Page<Department> pageModel = departmentService.selectPage(page,limit,departmentQueryVo);
+        return Result.ok(pageModel);
+    }
 
     /**
      * 上传科室
