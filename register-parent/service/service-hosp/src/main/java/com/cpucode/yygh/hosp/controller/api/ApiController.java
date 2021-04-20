@@ -8,6 +8,7 @@ import com.cpucode.yygh.common.utils.MD5;
 import com.cpucode.yygh.hosp.service.DepartmentService;
 import com.cpucode.yygh.hosp.service.HospitalService;
 import com.cpucode.yygh.hosp.service.HospitalSetService;
+import com.cpucode.yygh.hosp.service.ScheduleService;
 import com.cpucode.yygh.model.hosp.Department;
 import com.cpucode.yygh.model.hosp.Hospital;
 import com.cpucode.yygh.vo.hosp.DepartmentQueryVo;
@@ -42,6 +43,36 @@ public class ApiController {
 
     @Autowired
     private DepartmentService departmentService;
+
+    @Autowired
+    private ScheduleService scheduleService;
+
+    /**
+     * 上传排班信息
+     * @param request
+     * @return
+     */
+    @ApiOperation(value = "上传排班")
+    @PostMapping("saveSchedule")
+    public Result saveSchedule(HttpServletRequest request) {
+        Map<String, Object> paramMap = HttpRequestHelper.switchMap(request.getParameterMap());
+
+        //医院编号
+        String hoscode = (String)paramMap.get("hoscode");
+
+        if(StringUtils.isEmpty(hoscode)) {
+            throw new YyghException(ResultCodeEnum.PARAM_ERROR);
+        }
+
+        //签名校验
+        if(!HttpRequestHelper.isSignEquals(paramMap, hospitalSetService.getSignKey(hoscode))) {
+            throw new YyghException(ResultCodeEnum.SIGN_ERROR);
+        }
+
+        scheduleService.save(paramMap);
+        return Result.ok();
+    }
+
 
     /**
      * 删除科室
