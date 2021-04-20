@@ -11,7 +11,9 @@ import com.cpucode.yygh.hosp.service.HospitalSetService;
 import com.cpucode.yygh.hosp.service.ScheduleService;
 import com.cpucode.yygh.model.hosp.Department;
 import com.cpucode.yygh.model.hosp.Hospital;
+import com.cpucode.yygh.model.hosp.Schedule;
 import com.cpucode.yygh.vo.hosp.DepartmentQueryVo;
+import com.cpucode.yygh.vo.hosp.ScheduleQueryVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +48,44 @@ public class ApiController {
 
     @Autowired
     private ScheduleService scheduleService;
+
+    /**
+     * 获取排班分页列表
+     * @param request
+     * @return
+     */
+    @ApiOperation(value = "获取排班分页列表")
+    @PostMapping("schedule/list")
+    public Result schedule(HttpServletRequest request) {
+        Map<String, Object> paramMap = HttpRequestHelper.switchMap(request.getParameterMap());
+        //医院编号
+        String hoscode = (String)paramMap.get("hoscode");
+
+        //科室编号
+        String depcode = (String)paramMap.get("depcode");
+
+        //当前页 和 每页记录数
+        int page = StringUtils.isEmpty(paramMap.get("page")) ? 1 : Integer.parseInt((String)paramMap.get("page"));
+        int limit = StringUtils.isEmpty(paramMap.get("limit")) ? 10 : Integer.parseInt((String)paramMap.get("limit"));
+
+        if(StringUtils.isEmpty(hoscode)) {
+            throw new YyghException(ResultCodeEnum.PARAM_ERROR);
+        }
+        //签名校验
+        if(!HttpRequestHelper.isSignEquals(paramMap, hospitalSetService.getSignKey(hoscode))) {
+            throw new YyghException(ResultCodeEnum.SIGN_ERROR);
+        }
+
+        ScheduleQueryVo scheduleQueryVo = new ScheduleQueryVo();
+        scheduleQueryVo.setHoscode(hoscode);
+        scheduleQueryVo.setDepcode(depcode);
+
+        //调用service方法
+        Page<Schedule> pageModel = scheduleService.selectPage(page , limit, scheduleQueryVo);
+
+        return Result.ok(pageModel);
+    }
+
 
     /**
      * 上传排班信息
