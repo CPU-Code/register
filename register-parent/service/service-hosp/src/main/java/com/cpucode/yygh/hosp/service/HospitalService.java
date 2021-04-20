@@ -1,6 +1,8 @@
 package com.cpucode.yygh.hosp.service;
 
 import com.cpucode.yygh.model.hosp.Hospital;
+import com.cpucode.yygh.vo.hosp.HospitalQueryVo;
+import org.springframework.data.domain.Page;
 
 import java.util.Map;
 
@@ -24,5 +26,15 @@ public interface HospitalService {
      * @return
      */
     Hospital getByHoscode(String hoscode);
+
+    /**
+     * 分页查询
+     * @param page 当前页码
+     * @param limit 每页记录数
+     * @param hospitalQueryVo 查询条件
+     * @return
+     */
+    Page<Hospital> selectHospPage(Integer page, Integer limit, HospitalQueryVo hospitalQueryVo);
+
 
 }
