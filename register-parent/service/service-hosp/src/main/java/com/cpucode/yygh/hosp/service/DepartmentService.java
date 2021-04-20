@@ -29,4 +29,11 @@ public interface DepartmentService {
      */
     Page<Department> selectPage(Integer page, Integer limit, DepartmentQueryVo departmentQueryVo);
 
+    /**
+     * 删除科室
+     * @param hoscode
+     * @param depcode
+     */
+    void remove(String hoscode, String depcode);
+
 }

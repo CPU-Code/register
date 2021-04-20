@@ -44,6 +44,35 @@ public class ApiController {
     private DepartmentService departmentService;
 
     /**
+     * 删除科室
+     * @param request
+     * @return
+     */
+    @ApiOperation(value = "删除科室")
+    @PostMapping("department/remove")
+    public Result removeDepartment(HttpServletRequest request) {
+        //获取传递过来科室信息
+        Map<String, Object> paramMap = HttpRequestHelper.switchMap(request.getParameterMap());
+
+        //医院编号 和 科室编号
+        String hoscode = (String)paramMap.get("hoscode");
+        String depcode = (String)paramMap.get("depcode");
+
+        if(StringUtils.isEmpty(hoscode)) {
+            throw new YyghException(ResultCodeEnum.PARAM_ERROR);
+        }
+        //签名校验
+        if(!HttpRequestHelper.isSignEquals(paramMap, hospitalSetService.getSignKey(hoscode))) {
+            throw new YyghException(ResultCodeEnum.SIGN_ERROR);
+        }
+
+        departmentService.remove(hoscode, depcode);
+
+        return Result.ok();
+    }
+
+
+    /**
      * 查询科室接口
      * @param request
      * @return

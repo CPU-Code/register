@@ -29,6 +29,23 @@ public class DepartmentServiceImpl implements DepartmentService {
     private DepartmentRepository departmentRepository;
 
     /**
+     * 删除科室
+     * @param hoscode
+     * @param depcode
+     */
+    @Override
+    public void remove(String hoscode, String depcode) {
+        Department department = departmentRepository.
+                getDepartmentByHoscodeAndDepcode(hoscode, depcode);
+
+        if(null != department) {
+            //departmentRepository.delete(department);
+            departmentRepository.deleteById(department.getId());
+        }
+    }
+
+
+    /**
      * 上传科室接口
      * @param paramMap
      */
