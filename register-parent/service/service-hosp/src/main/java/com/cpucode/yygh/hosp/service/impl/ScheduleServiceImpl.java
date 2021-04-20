@@ -27,6 +27,22 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Autowired
     private ScheduleRepository scheduleRepository;
 
+    /**
+     * 删除排班
+     * @param hoscode
+     * @param hosScheduleId
+     */
+    @Override
+    public void remove(String hoscode, String hosScheduleId) {
+        //根据医院编号和排班编号查询信息
+        Schedule schedule = scheduleRepository.
+                getScheduleByHoscodeAndHosScheduleId(hoscode, hosScheduleId);
+
+        if(null != schedule) {
+            scheduleRepository.deleteById(schedule.getId());
+        }
+    }
+
     @Override
     public Page<Schedule> selectPage(Integer page, Integer limit, ScheduleQueryVo scheduleQueryVo) {
         // 创建Pageable对象，设置当前页和每页记录数

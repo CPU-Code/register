@@ -50,6 +50,37 @@ public class ApiController {
     private ScheduleService scheduleService;
 
     /**
+     * 删除科室
+     * @param request
+     * @return
+     */
+    @ApiOperation(value = "删除科室")
+    @PostMapping("schedule/remove")
+    public Result removeSchedule(HttpServletRequest request) {
+        //获取传递过来科室信息
+        Map<String, Object> paramMap = HttpRequestHelper.switchMap(request.getParameterMap());
+
+        //获取医院编号和排班编号
+        String hoscode = (String)paramMap.get("hoscode");
+        String hosScheduleId = (String)paramMap.get("hosScheduleId");
+
+        //TODO 签名校验
+
+        if(StringUtils.isEmpty(hoscode)) {
+            throw new YyghException(ResultCodeEnum.PARAM_ERROR);
+        }
+        //签名校验
+        if(!HttpRequestHelper.isSignEquals(paramMap, hospitalSetService.getSignKey(hoscode))) {
+            throw new YyghException(ResultCodeEnum.SIGN_ERROR);
+        }
+
+        scheduleService.remove(hoscode, hosScheduleId);
+
+        return Result.ok();
+    }
+
+
+    /**
      * 获取排班分页列表
      * @param request
      * @return
