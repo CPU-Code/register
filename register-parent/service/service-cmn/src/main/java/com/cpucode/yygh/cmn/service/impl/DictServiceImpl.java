@@ -178,4 +178,25 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
         return codeDict;
     }
 
+    /**
+     * 根据dicode查询下层节点
+     * @param dictCode
+     * @return
+     */
+    @Override
+    public List<Dict> findByDictCode(String dictCode) {
+        //根据dictcode获取对应id
+        Dict codeDict = this.getDictByDictCode(dictCode);
+
+        if(null == codeDict){
+            return null;
+        }
+
+        //根据id获取子节点
+        List<Dict> chlidData = this.findChlidData(codeDict.getId());
+
+        return chlidData;
+    }
+
+
 }
