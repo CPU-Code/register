@@ -4,7 +4,9 @@ import com.cpucode.yygh.cmn.service.DictService;
 import com.cpucode.yygh.common.result.Result;
 import com.cpucode.yygh.model.cmn.Dict;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -52,7 +54,6 @@ public class DictController {
     }
 
 
-
     /**
      * 根据数据id查询子数据列表
      * @param id
@@ -65,4 +66,39 @@ public class DictController {
 
         return Result.ok(list);
     }
+
+    /**
+     * 获取数据字典名称
+     * @param dictCode
+     * @param value
+     * @return
+     */
+    @ApiOperation(value = "获取数据字典名称")
+    @GetMapping(value = "/getName/{dictCode}/{value}")
+    public String getName(
+            @ApiParam(name = "dictCode", value = "上级编码", required = true)
+            @PathVariable("dictCode") String dictCode,
+
+            @ApiParam(name = "value", value = "值", required = true)
+            @PathVariable("value") String value) {
+
+        String dictName = dictService.getDictName(dictCode,value);
+
+        return dictName;
+    }
+
+    /**
+     * 根据value查询
+     * @param value
+     * @return
+     */
+    @ApiOperation(value = "获取数据字典名称")
+    @ApiImplicitParam(name = "value", value = "值", required = true, dataType = "Long", paramType = "path")
+    @GetMapping(value = "/getName/{value}")
+    public String getName(
+            @ApiParam(name = "value", value = "值", required = true)
+            @PathVariable("value") String value) {
+        return dictService.getDictName("", value);
+    }
+
 }
