@@ -23,6 +23,14 @@ export default {
       url: `/admin/cmn/dict/findChildData/${dictCode}`,
       method: 'get'
     })
+  },
+  // 更新上线状态
+  updateStatus(id, status) {
+    return request({
+      url: `/admin/hosp/hospital/updateHospStatus/${id}/${status}`,
+      method: 'get'
+    })
   }
+
 }
 

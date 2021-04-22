@@ -36,5 +36,9 @@ public interface HospitalService {
      */
     Page<Hospital> selectHospPage(Integer page, Integer limit, HospitalQueryVo hospitalQueryVo);
 
+    /**
+     * 更新医院上线状态
+     */
+    void updateStatus(String id, Integer status);
 
 }

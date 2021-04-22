@@ -51,5 +51,23 @@ public class HospitalController {
         return Result.ok(pageModel);
     }
 
+    /**
+     * 更新上线状态
+     * @param id
+     * @param status
+     * @return
+     */
+    @ApiOperation(value = "更新上线状态")
+    @GetMapping("updateHospStatus/{id}/{status}")
+    public Result updateHospStatus(
+            @ApiParam(name = "id", value = "医院id", required = true)
+            @PathVariable("id") String id,
+            @ApiParam(name = "status", value = "状态（0：未上线 1：已上线）", required = true)
+            @PathVariable("status") Integer status){
+        hospitalService.updateStatus(id, status);
+
+        return Result.ok();
+    }
+
 
 }

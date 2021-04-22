@@ -67,6 +67,10 @@
       <el-table-column prop="createTime" label="创建时间"/>
 
       <el-table-column label="操作" width="230" align="center">
+        <template slot-scope="scope">
+          <el-button v-if="scope.row.status == 1"  type="primary" size="mini" @click="updateStatus(scope.row.id, 0)">下线</el-button>
+          <el-button v-if="scope.row.status == 0"  type="danger" size="mini" @click="updateStatus(scope.row.id, 1)">上线</el-button>
+        </template>
       </el-table-column>
     </el-table>
 
@@ -86,18 +90,22 @@
 
 
 <script>
-  import hospitalApi from '@/api/hosp'
+  import hospApi from '@/api/hosp'
+
   export default {
     data() {
       return {
         listLoading: true,    // 数据是否正在加载
-        list: null,           // banner列表
+        list: null,           // 医院列表数据集合
         total: 0,             // 数据库中的总记录数
         page: 1,              // 默认页码
         limit: 10,            // 每页记录数
-        searchObj: {},        // 查询表单对象
-        provinceList: [],
-        cityList: [],
+        searchObj: {
+          provinceCode:'',
+          cityCode:''
+        },        // 查询表单对象
+        provinceList: [],     //所有省集合
+        cityList: [],         //所有市集合
         districtList: []
       }
     },
@@ -105,26 +113,34 @@
     // 生命周期函数：内存准备完毕，页面尚未渲染
     created() {
       console.log('list created......')
+      //调用医院列表
       this.fetchData()
 
-      hospitalApi.findByDictCode('Province')
-        .then(response => {
-          this.provinceList = response.data
-        })
+      //调用查询所有省的方法
+      this.findAllProvince()
     },
 
     methods: {
-      // 加载banner列表数据
+      //调用查询所有省的方法
+      findAllProvince() {
+        hospApi.findByDictCode('Province')
+          .then(response => {
+            this.provinceList = response.data
+          })
+      },
+      // 医院列表
       fetchData(page = 1) {
         console.log('翻页。。。' + page)
         // 异步获取远程数据（ajax）
         this.page = page
-        hospitalApi.getPageList(this.page, this.limit, this.searchObj)
+        hospApi.getPageList(this.page, this.limit, this.searchObj)
           .then(response => {
+            //每页数据集合
             this.list = response.data.content
+            //总记录数
             this.total = response.data.totalElements
 
-            // 数据加载并绑定成功
+            // 加载图表不显示
             this.listLoading = false
           })
       },
@@ -142,17 +158,29 @@
         this.searchObj = {}
         this.fetchData()
       },
+      //点击某个省，显示里面市（联动）
       provinceChanged() {
+        //初始化值
         this.cityList = []
         this.searchObj.cityCode = null
         this.districtList = []
         this.searchObj.districtCode = null
 
-        hospitalApi.findByParentId(this.searchObj.provinceCode)
+        //调用方法，根据省id，查询下面子节点
+        hospApi.findByParentId(this.searchObj.provinceCode)
           .then(response => {
-          this.cityList = response.data
+            this.cityList = response.data
         })
+      },
+      // 更新上线状态
+      updateStatus(id, status) {
+        hospApi.updateStatus(id, status)
+          .then(response => {
+            //刷新页面
+            this.fetchData(this.page)
+          })
       }
+
     }
   }
 </script>
