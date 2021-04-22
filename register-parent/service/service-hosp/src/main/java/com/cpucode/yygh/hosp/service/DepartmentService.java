@@ -2,8 +2,10 @@ package com.cpucode.yygh.hosp.service;
 
 import com.cpucode.yygh.model.hosp.Department;
 import com.cpucode.yygh.vo.hosp.DepartmentQueryVo;
+import com.cpucode.yygh.vo.hosp.DepartmentVo;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -35,5 +37,10 @@ public interface DepartmentService {
      * @param depcode
      */
     void remove(String hoscode, String depcode);
+
+    /**
+     * 根据医院编号，查询医院所有科室列表
+     */
+    List<DepartmentVo> findDeptTree(String hoscode);
 
 }
