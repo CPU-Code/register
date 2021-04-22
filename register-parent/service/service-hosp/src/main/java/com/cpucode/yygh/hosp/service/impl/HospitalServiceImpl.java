@@ -169,6 +169,22 @@ public class HospitalServiceImpl implements HospitalService {
         return result;
     }
 
+    /**
+     * 根据医院编号获取医院名称
+     * @param hoscode
+     * @return
+     */
+    @Override
+    public String getHospName(String hoscode) {
+        Hospital hospital = hospitalRepository.getHospitalByHoscode(hoscode);
+
+        if(null != hospital) {
+            return hospital.getHosname();
+        }
+
+        return "";
+    }
+
 
 
 }

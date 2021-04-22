@@ -35,4 +35,15 @@ public interface ScheduleService {
      * @param hosScheduleId
      */
     void remove(String hoscode, String hosScheduleId);
+
+    /**
+     * 根据医院编号 和 科室编号 ，查询排班规则数据
+     * @param page
+     * @param limit
+     * @param hoscode
+     * @param depcode
+     * @return
+     */
+    Map<String, Object> getRuleSchedule(long page, long limit, String hoscode, String depcode);
+
 }
