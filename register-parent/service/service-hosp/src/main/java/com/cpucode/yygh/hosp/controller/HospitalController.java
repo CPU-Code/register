@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author : cpucode
@@ -68,6 +69,22 @@ public class HospitalController {
 
         return Result.ok();
     }
+
+    /**
+     * 获取医院详情
+     * @param id
+     * @return
+     */
+    @ApiOperation(value = "获取医院详情")
+    @GetMapping("showHospDetail/{id}")
+    public Result showHospDetail(
+            @ApiParam(name = "id", value = "医院id", required = true)
+            @PathVariable String id) {
+        Map<String, Object> map = hospitalService.getHospById(id);
+
+        return Result.ok(map);
+    }
+
 
 
 }
