@@ -2,11 +2,13 @@ package com.cpucode.yygh.hosp.controller;
 
 import com.cpucode.yygh.common.result.Result;
 import com.cpucode.yygh.hosp.service.ScheduleService;
+import com.cpucode.yygh.model.hosp.Schedule;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -45,5 +47,23 @@ public class ScheduleController {
 
         return Result.ok(map);
     }
+
+    /**
+     * 根据医院编号 、科室编号和工作日期，查询排班详细信息
+     * @param hoscode
+     * @param depcode
+     * @param workDate
+     * @return
+     */
+    @ApiOperation(value = "查询排班详细信息")
+    @GetMapping("getScheduleDetail/{hoscode}/{depcode}/{workDate}")
+    public Result getScheduleDetail( @PathVariable String hoscode,
+                                     @PathVariable String depcode,
+                                     @PathVariable String workDate) {
+        List<Schedule> list = scheduleService.getDetailSchedule(hoscode,depcode,workDate);
+
+        return Result.ok(list);
+    }
+
 
 }

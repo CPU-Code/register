@@ -2,6 +2,7 @@ package com.cpucode.yygh.hosp.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.cpucode.yygh.hosp.repository.ScheduleRepository;
+import com.cpucode.yygh.hosp.service.DepartmentService;
 import com.cpucode.yygh.hosp.service.HospitalService;
 import com.cpucode.yygh.hosp.service.ScheduleService;
 import com.cpucode.yygh.model.hosp.Schedule;
@@ -42,6 +43,9 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Autowired
     private HospitalService hospitalService;
+
+    @Autowired
+    private DepartmentService departmentService;
 
 
     /**
@@ -228,5 +232,42 @@ public class ScheduleServiceImpl implements ScheduleService {
 
         return dayOfWeek;
     }
+
+    /**
+     * 根据医院编号 、科室编号和工作日期，查询排班详细信息
+     * @param hoscode
+     * @param depcode
+     * @param workDate
+     * @return
+     */
+    @Override
+    public List<Schedule> getDetailSchedule(String hoscode, String depcode, String workDate) {
+        //根据参数查询mongodb
+        List<Schedule> scheduleList =
+                scheduleRepository.findScheduleByHoscodeAndDepcodeAndWorkDate(hoscode,depcode,new DateTime(workDate).toDate());
+
+        //把得到list集合遍历，向设置其他值：医院名称、科室名称、日期对应星期
+        scheduleList.stream().forEach(item->{
+            this.packageSchedule(item);
+        });
+
+        return scheduleList;
+    }
+
+    /**
+     * 封装排班详情其他值 医院名称、科室名称、日期对应星期
+     * @param schedule
+     */
+    private Schedule packageSchedule(Schedule schedule) {
+        //设置医院名称
+        schedule.getParam().put("hosname",hospitalService.getHospName(schedule.getHoscode()));
+        //设置科室名称
+        schedule.getParam().put("depname",departmentService.getDepName(schedule.getHoscode(),schedule.getDepcode()));
+        //设置日期对应星期
+        schedule.getParam().put("dayOfWeek",this.getDayOfWeek(new DateTime(schedule.getWorkDate())));
+
+        return schedule;
+    }
+
 
 }
