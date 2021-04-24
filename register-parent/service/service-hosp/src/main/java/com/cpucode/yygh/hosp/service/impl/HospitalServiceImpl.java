@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -185,6 +186,15 @@ public class HospitalServiceImpl implements HospitalService {
         return "";
     }
 
+    /**
+     * 根据医院名称获取医院列表
+     * @param hosname
+     * @return
+     */
+    @Override
+    public List<Hospital> findByHosname(String hosname) {
+        return hospitalRepository.findHospitalByHosnameLike(hosname);
+    }
 
 
 }
