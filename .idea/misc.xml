@@ -8,6 +8,7 @@
       <list>
         <option value="$PROJECT_DIR$/register-parent/pom.xml" />
         <option value="$PROJECT_DIR$/register-parent/hospital-manage/pom.xml" />
+        <option value="$PROJECT_DIR$/vue-yygh-size/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

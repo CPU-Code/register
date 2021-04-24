@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/register-parent/hospital-manage/hospital-manage.iml" filepath="$PROJECT_DIR$/register-parent/hospital-manage/hospital-manage.iml" />
       <module fileurl="file://$PROJECT_DIR$/register-parent/model/model.iml" filepath="$PROJECT_DIR$/register-parent/model/model.iml" />
       <module fileurl="file://$PROJECT_DIR$/register-parent/register-parent.iml" filepath="$PROJECT_DIR$/register-parent/register-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/register-parent/server-gateway/server-gateway.iml" filepath="$PROJECT_DIR$/register-parent/server-gateway/server-gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/register-parent/service/service.iml" filepath="$PROJECT_DIR$/register-parent/service/service.iml" />
       <module fileurl="file://$PROJECT_DIR$/register-parent/service-client/service-client.iml" filepath="$PROJECT_DIR$/register-parent/service-client/service-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/register-parent/service/service-cmn/service-cmn.iml" filepath="$PROJECT_DIR$/register-parent/service/service-cmn/service-cmn.iml" />
@@ -15,6 +16,7 @@
       <module fileurl="file://$PROJECT_DIR$/register-parent/service/service-user/service-user.iml" filepath="$PROJECT_DIR$/register-parent/service/service-user/service-user.iml" />
       <module fileurl="file://$PROJECT_DIR$/register-parent/common/service-util/service-util.iml" filepath="$PROJECT_DIR$/register-parent/common/service-util/service-util.iml" />
       <module fileurl="file://$PROJECT_DIR$/vue-register-parent/vue-register-parent.iml" filepath="$PROJECT_DIR$/vue-register-parent/vue-register-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vue-yygh-size/vue-yygh-size.iml" filepath="$PROJECT_DIR$/vue-yygh-size/vue-yygh-size.iml" />
     </modules>
   </component>
 </project>
