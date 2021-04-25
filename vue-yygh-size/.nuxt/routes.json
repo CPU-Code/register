@@ -1,16 +1,20 @@
 [
   {
+    "name": "hospital-detail-hoscode",
+    "path": "/hospital/detail/:hoscode?",
+    "component": "D:\\\\Date\\\\github\\\\register\\\\vue-yygh-size\\\\pages\\\\hospital\\\\detail\\\\_hoscode.vue",
+    "chunkName": "pages/hospital/detail/_hoscode"
+  },
+  {
     "name": "hospital-hoscode",
     "path": "/hospital/:hoscode?",
     "component": "D:\\\\Date\\\\github\\\\register\\\\vue-yygh-size\\\\pages\\\\hospital\\\\_hoscode.vue",
-    "chunkName": "pages/hospital/_hoscode",
-    "_name": "_a83ba5ec"
+    "chunkName": "pages/hospital/_hoscode"
   },
   {
     "name": "index",
     "path": "/",
     "component": "D:\\\\Date\\\\github\\\\register\\\\vue-yygh-size\\\\pages\\\\index.vue",
-    "chunkName": "pages/index",
-    "_name": "_59754d6c"
+    "chunkName": "pages/index"
   }
 ]
