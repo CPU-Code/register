@@ -5,6 +5,7 @@ import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
 const _1129b71b = () => interopDefault(import('..\\pages\\hospital\\detail\\_hoscode.vue' /* webpackChunkName: "pages/hospital/detail/_hoscode" */))
+const _25f0853c = () => interopDefault(import('..\\pages\\hospital\\notice\\_hoscode.vue' /* webpackChunkName: "pages/hospital/notice/_hoscode" */))
 const _a83ba5ec = () => interopDefault(import('..\\pages\\hospital\\_hoscode.vue' /* webpackChunkName: "pages/hospital/_hoscode" */))
 const _59754d6c = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
@@ -23,6 +24,10 @@ export const routerOptions = {
     path: "/hospital/detail/:hoscode?",
     component: _1129b71b,
     name: "hospital-detail-hoscode"
+  }, {
+    path: "/hospital/notice/:hoscode?",
+    component: _25f0853c,
+    name: "hospital-notice-hoscode"
   }, {
     path: "/hospital/:hoscode?",
     component: _a83ba5ec,
