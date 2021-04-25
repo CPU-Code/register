@@ -3,6 +3,7 @@ package com.cpucode.yygh.hosp.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.cpucode.yygh.cmn.client.DictFeignClient;
 import com.cpucode.yygh.hosp.repository.HospitalRepository;
+import com.cpucode.yygh.hosp.service.DepartmentService;
 import com.cpucode.yygh.hosp.service.HospitalService;
 import com.cpucode.yygh.model.hosp.Hospital;
 import com.cpucode.yygh.vo.hosp.HospitalQueryVo;
@@ -30,6 +31,9 @@ public class HospitalServiceImpl implements HospitalService {
 
     @Autowired
     private DictFeignClient dictFeignClient;
+
+    @Autowired
+    private DepartmentService departmentService;
 
 
     /**
@@ -194,6 +198,27 @@ public class HospitalServiceImpl implements HospitalService {
     @Override
     public List<Hospital> findByHosname(String hosname) {
         return hospitalRepository.findHospitalByHosnameLike(hosname);
+    }
+
+    /**
+     * 医院预约挂号详情
+     * @param hoscode
+     * @return
+     */
+    @Override
+    public Map<String, Object> item(String hoscode) {
+        Map<String, Object> result = new HashMap<>();
+
+        //医院详情
+        Hospital hospital = this.setHospitalHosType(this.getByHoscode(hoscode));
+        result.put("hospital", hospital);
+
+        //预约规则
+        result.put("bookingRule", hospital.getBookingRule());
+        //不需要重复返回
+        hospital.setBookingRule(null);
+
+        return result;
     }
 
 

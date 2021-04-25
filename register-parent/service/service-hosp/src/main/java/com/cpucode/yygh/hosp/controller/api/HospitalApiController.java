@@ -1,10 +1,11 @@
 package com.cpucode.yygh.hosp.controller.api;
 
 import com.cpucode.yygh.common.result.Result;
+import com.cpucode.yygh.hosp.service.DepartmentService;
 import com.cpucode.yygh.hosp.service.HospitalService;
 import com.cpucode.yygh.model.hosp.Hospital;
+import com.cpucode.yygh.vo.hosp.DepartmentVo;
 import com.cpucode.yygh.vo.hosp.HospitalQueryVo;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author : cpucode
@@ -26,6 +30,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class HospitalApiController {
     @Autowired
     private HospitalService hospitalService;
+
+    @Autowired
+    private DepartmentService departmentService;
 
     /**
      * 查询医院列表
@@ -60,5 +67,36 @@ public class HospitalApiController {
 
         return Result.ok(hospitalService.findByHosname(hosname));
     }
+
+    /**
+     * 根据医院编号获取科室
+     * @param hoscode
+     * @return
+     */
+    @ApiOperation(value = "根据医院编号获取科室")
+    @GetMapping("department/{hoscode}")
+    public Result index(
+            @ApiParam(name = "hoscode", value = "医院code", required = true)
+            @PathVariable String hoscode) {
+        List<DepartmentVo> list = departmentService.findDeptTree(hoscode);
+
+        return Result.ok(list);
+    }
+
+    /**
+     * 医院预约挂号详情
+     * @param hoscode
+     * @return
+     */
+    @ApiOperation(value = "医院预约挂号详情")
+    @GetMapping("findHospDetail/{hoscode}")
+    public Result item(
+            @ApiParam(name = "hoscode", value = "医院code", required = true)
+            @PathVariable String hoscode) {
+        Map<String, Object> map = hospitalService.item(hoscode);
+
+        return Result.ok(map);
+    }
+
 
 }
