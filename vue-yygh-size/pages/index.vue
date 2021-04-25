@@ -246,7 +246,6 @@ export default {
         })
     },
 
-
     //在下拉框选择某一个内容，执行下面方法，跳转到详情页面中
     handleSelect(item) {
       window.location.href = '/hospital/' + item.hoscode

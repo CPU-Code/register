@@ -1,8 +1,16 @@
 [
   {
+    "name": "hospital-hoscode",
+    "path": "/hospital/:hoscode?",
+    "component": "D:\\\\Date\\\\github\\\\register\\\\vue-yygh-size\\\\pages\\\\hospital\\\\_hoscode.vue",
+    "chunkName": "pages/hospital/_hoscode",
+    "_name": "_a83ba5ec"
+  },
+  {
     "name": "index",
     "path": "/",
     "component": "D:\\\\Date\\\\github\\\\register\\\\vue-yygh-size\\\\pages\\\\index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_59754d6c"
   }
 ]

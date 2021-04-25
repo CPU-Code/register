@@ -75,7 +75,7 @@ public class HospitalApiController {
      */
     @ApiOperation(value = "根据医院编号获取科室")
     @GetMapping("department/{hoscode}")
-    public Result index(
+    public Result department(
             @ApiParam(name = "hoscode", value = "医院code", required = true)
             @PathVariable String hoscode) {
         List<DepartmentVo> list = departmentService.findDeptTree(hoscode);
@@ -90,7 +90,7 @@ public class HospitalApiController {
      */
     @ApiOperation(value = "医院预约挂号详情")
     @GetMapping("findHospDetail/{hoscode}")
-    public Result item(
+    public Result findHospDetail(
             @ApiParam(name = "hoscode", value = "医院code", required = true)
             @PathVariable String hoscode) {
         Map<String, Object> map = hospitalService.item(hoscode);
