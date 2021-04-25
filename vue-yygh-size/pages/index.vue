@@ -13,7 +13,7 @@
           <el-autocomplete
             class="search-input"
             prefix-icon="el-icon-search"
-            v-model="state"
+            v-model="hosname"
             :fetch-suggestions="querySearchAsync"
             placeholder="点击输入医院名称"
             @select="handleSelect"
@@ -71,7 +71,7 @@
                     </div>
                     <div class="icon-wrapper">
                       <span class="iconfont"></span>
-                      每天{{ item.bookingRule.releaseTime }}放号
+                      每天 {{ item.bookingRule.releaseTime }} 放号
                     </div>
                   </div>
                 </div>
@@ -172,7 +172,6 @@
 import hospitalApi from '@/api/hosp/hospital'
 import dictApi from '@/api/cmn/dict'
 
-
 export default {
   //服务端渲染异步，显示医院列表
   asyncData({ params, error }) {
@@ -227,9 +226,72 @@ export default {
             this.districtList.push(response.data[i])
           }
         })
-
     },
-  }
 
+    //在输入框输入值，弹出下拉框，显示相关内容
+    querySearchAsync(queryString, cb) {
+      this.searchObj = []
+
+      if(queryString == '') {
+        return
+      }
+
+      hospitalApi.getByHosname(queryString)
+        .then(response => {
+          for (let i = 0, len = response.data.length; i <len; i++) {
+            response.data[i].value = response.data[i].hosname
+          }
+
+          cb(response.data)
+        })
+    },
+
+
+    //在下拉框选择某一个内容，执行下面方法，跳转到详情页面中
+    handleSelect(item) {
+      window.location.href = '/hospital/' + item.hoscode
+    },
+
+    //根据医院等级查询
+    hostypeSelect(hostype, index) {
+      //准备数据
+      this.list = []
+      this.page = 1
+      this.hostypeActiveIndex = index
+      this.searchObj.hostype = hostype
+
+      //调用查询医院列表方法
+      this.getList()
+    },
+
+    //根据地区查询医院
+    districtSelect(districtCode, index) {
+      this.list = []
+      this.page = 1
+      this.provinceActiveIndex = index
+      this.searchObj.districtCode = districtCode
+
+      this.getList();
+    },
+
+    //点击某个医院名称，跳转到详情页面中
+    show(hoscode) {
+      window.location.href = '/hospital/' + hoscode
+    },
+
+    //查询医院列表
+    getList() {
+      hospitalApi.getPageList(this.page, this.limit, this.searchObj)
+        .then(response => {
+          for(let i in response.data.content) {
+            this.list.push(response.data.content[i])
+          }
+
+          this.page = response.data.totalPages
+        })
+    },
+
+
+  }
 }
 </script>
