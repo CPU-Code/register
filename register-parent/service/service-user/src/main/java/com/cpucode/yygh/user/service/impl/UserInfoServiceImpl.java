@@ -3,6 +3,7 @@ package com.cpucode.yygh.user.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cpucode.yygh.common.exception.YyghException;
+import com.cpucode.yygh.common.helper.JwtHelper;
 import com.cpucode.yygh.common.result.ResultCodeEnum;
 import com.cpucode.yygh.model.user.UserInfo;
 import com.cpucode.yygh.user.mapper.UserInfoMapper;
@@ -28,7 +29,7 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
      * 会员登录
      */
     @Override
-    public Map<String, Object> login(LoginVo loginVo) {
+    public Map<String, Object> loginUser(LoginVo loginVo) {
         String phone = loginVo.getPhone();
         String code = loginVo.getCode();
 
@@ -49,6 +50,7 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
 
         //第一次使用这个手机号登录
         if(null == userInfo) {
+            //添加信息到数据库
             userInfo = new UserInfo();
 
             userInfo.setName("");
@@ -65,7 +67,10 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
 
         //TODO 记录登录
 
-        //返回页面显示名称
+        //不是第一次，直接登录
+        //返回登录信息
+        //返回登录用户名
+        //返回token信息
         Map<String, Object> map = new HashMap<>();
         String name = userInfo.getName();
 
@@ -77,7 +82,10 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
         }
 
         map.put("name", name);
-        map.put("token", "");
+
+        //jwt生成token字符串
+        String token = JwtHelper.createToken(userInfo.getId(), name);
+        map.put("token",token);
 
         return map;
     }

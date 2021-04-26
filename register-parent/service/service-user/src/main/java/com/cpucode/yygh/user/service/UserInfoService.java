@@ -19,6 +19,6 @@ public interface UserInfoService extends IService<UserInfo> {
      * @param loginVo
      * @return
      */
-    Map<String, Object> login(LoginVo loginVo);
+    Map<String, Object> loginUser(LoginVo loginVo);
 
 }
