@@ -11,5 +11,12 @@
 
     <artifactId>service-user</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.cpucode</groupId>
+            <artifactId>service-cmn-client</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>
