@@ -52,7 +52,7 @@ public class MsmApiController {
 
         //生成验证码放到redis里面，设置有效时间
         if(isSend) {
-            redisTemplate.opsForValue().set(phone, code,2, TimeUnit.MINUTES);
+            redisTemplate.opsForValue().set(phone, code,10, TimeUnit.MINUTES);
 
             return Result.ok();
         } else {
