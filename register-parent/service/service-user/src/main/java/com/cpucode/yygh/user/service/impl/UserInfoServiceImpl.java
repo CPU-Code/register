@@ -9,6 +9,8 @@ import com.cpucode.yygh.model.user.UserInfo;
 import com.cpucode.yygh.user.mapper.UserInfoMapper;
 import com.cpucode.yygh.user.service.UserInfoService;
 import com.cpucode.yygh.vo.user.LoginVo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -25,21 +27,28 @@ import java.util.Map;
 @Service
 public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> implements UserInfoService {
 
+    @Autowired
+    private RedisTemplate<String,String> redisTemplate;
+
     /**
      * 会员登录
      */
     @Override
     public Map<String, Object> loginUser(LoginVo loginVo) {
+        //从loginVo获取输入的手机号，和验证码
         String phone = loginVo.getPhone();
         String code = loginVo.getCode();
 
         //判断手机号和验证码是否为空
-        if(StringUtils.isEmpty(phone) ||
-                StringUtils.isEmpty(code)) {
+        if(StringUtils.isEmpty(phone) || StringUtils.isEmpty(code)) {
             throw new YyghException(ResultCodeEnum.PARAM_ERROR);
         }
 
-        //TODO 校验校验验证码
+        //校验校验验证码
+        String mobleCode = redisTemplate.opsForValue().get(phone);
+        if(!code.equals(mobleCode)) {
+            throw new YyghException(ResultCodeEnum.CODE_ERROR);
+        }
 
         //手机号已被使用
         QueryWrapper<UserInfo> queryWrapper = new QueryWrapper<>();
@@ -64,8 +73,6 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
         if(userInfo.getStatus() == 0) {
             throw new YyghException(ResultCodeEnum.LOGIN_DISABLED_ERROR);
         }
-
-        //TODO 记录登录
 
         //不是第一次，直接登录
         //返回登录信息

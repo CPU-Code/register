@@ -13,9 +13,10 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.aliyun</groupId>
-            <artifactId>aliyun-java-sdk-core</artifactId>
+            <groupId>com.cloopen</groupId>
+            <artifactId>java-sms-sdk</artifactId>
+            <version>1.0.3</version>
         </dependency>
     </dependencies>
-    \
+
 </project>
