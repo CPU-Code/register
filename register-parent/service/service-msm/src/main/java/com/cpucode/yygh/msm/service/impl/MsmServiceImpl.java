@@ -48,12 +48,8 @@ public class MsmServiceImpl implements MsmService {
         String templateId = "1";
         String[] datas = {code, "3"};
 
-        //可选 扩展码，四位数字 0~9999
-        String subAppend = "1234";
-        //可选 第三方自定义消息id，最大支持32位英文数字，同账号下同一自然天内不允许重复
-        String reqId = "fadfafas";
 
-        HashMap<String, Object> result = sdk.sendTemplateSMS(to, templateId, datas, subAppend, reqId);
+        HashMap<String, Object> result = sdk.sendTemplateSMS(to, templateId, datas);
 
         if ("000000".equals(result.get("statusCode"))) {
             //正常返回输出data包体信息（map）
