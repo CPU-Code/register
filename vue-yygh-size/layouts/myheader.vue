@@ -10,17 +10,19 @@
       <!-- 搜索框 -->
       <div class="search-wrapper">
         <div class="hospital-search animation-show">
-
-          <el-autocomplete
-            class="search-input small"
-            prefix-icon="el-icon-search"
-            v-model="hosname"
-            :fetch-suggestions="querySearchAsync"
-            placeholder="点击输入医院名称"
-            @select="handleSelect"
-          >
-            <span slot="suffix" class="search-btn v-link highlight clickable selected">搜索 </span>
-          </el-autocomplete>
+          <div id="search" style="display: block;">
+            <el-autocomplete
+              class="search-input"
+              prefix-icon="el-icon-search"
+              v-model="hosname"
+              :fetch-suggestions="querySearchAsync"
+              :trigger-on-focus="false"
+              @select="handleSelect"
+              placeholder="点击输入医院名称"
+            >
+              <span slot="suffix" class="search-btn v-link highlight clickable selected">搜索 </span>
+            </el-autocomplete>
+          </div>
         </div>
       </div>
 
@@ -370,7 +372,7 @@
             id: 'weixinLogin',          // 需要显示的容器id
             appid: response.data.appid, // 公众号appid wx*******
             scope: response.data.scope, // 网页默认即可
-            redirect_uri: response.data.redirectUri, // 授权成功后回调的url
+            redirect_uri: response.data.redirect_uri, // 授权成功后回调的url
             state: response.data.state, // 可设置为简单的随机数加session用来校验
             style: 'black',             // 提供"black"、"white"可选。二维码的样式
             href: ''                    // 外部css文件url，需要https
