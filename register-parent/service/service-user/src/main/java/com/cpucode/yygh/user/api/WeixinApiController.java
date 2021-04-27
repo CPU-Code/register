@@ -72,7 +72,7 @@ public class WeixinApiController {
      */
     @RequestMapping("callback")
     public String callback(String code, String state) {
-        //获取授权临时票据
+        //获取授权临时票据 code
         System.out.println("微信授权服务器回调。。。。。。");
         System.out.println("state = " + state);
         System.out.println("code = " + code);
@@ -82,7 +82,9 @@ public class WeixinApiController {
             throw new YyghException(ResultCodeEnum.ILLEGAL_CALLBACK_REQUEST_ERROR);
         }
 
+        //第二步 拿着code和微信id和秘钥，请求微信固定地址 ，得到两个值
         //使用code和appid以及appscrect换取access_token
+        //  %s   占位符
         StringBuffer baseAccessTokenUrl = new StringBuffer()
                 .append("https://api.weixin.qq.com/sns/oauth2/access_token")
                 .append("?appid=%s")
@@ -97,6 +99,7 @@ public class WeixinApiController {
 
         String result = null;
         try {
+            //使用httpclient请求这个地址
             result = HttpClientUtils.get(accessTokenUrl);
         } catch (Exception e) {
             throw new YyghException(ResultCodeEnum.FETCH_ACCESSTOKEN_FAILD);
@@ -118,42 +121,46 @@ public class WeixinApiController {
 
         //根据access_token获取微信用户的基本信息
         //先根据openid进行数据库查询
-        //UserInfo userInfo = userInfoService.selectWxInfoOpenId(openId);
+        UserInfo userInfo = userInfoService.selectWxInfoOpenId(openId);
 
         // 如果没有查到用户信息,那么调用微信个人信息获取的接口
-        //if(null == userInfo){
-        //如果查询到个人信息，那么直接进行登录
-        //使用access_token换取受保护的资源：微信的个人信息
-        String baseUserInfoUrl = "https://api.weixin.qq.com/sns/userinfo" +
-                "?access_token=%s" +
-                "&openid=%s";
-        String userInfoUrl = String.format(baseUserInfoUrl, accessToken, openId);
-        String resultUserInfo = null;
-        try {
-            resultUserInfo = HttpClientUtils.get(userInfoUrl);
-        } catch (Exception e) {
-            throw new YyghException(ResultCodeEnum.FETCH_USERINFO_ERROR);
+        if(null == userInfo){
+            //数据库不存在微信信息
+
+            //拿着openid  和  access_token请求微信地址，得到扫描人信息
+            String baseUserInfoUrl = "https://api.weixin.qq.com/sns/userinfo" +
+                    "?access_token=%s" +
+                    "&openid=%s";
+            String userInfoUrl = String.format(baseUserInfoUrl, accessToken, openId);
+            String resultUserInfo = null;
+            try {
+                resultUserInfo = HttpClientUtils.get(userInfoUrl);
+            } catch (Exception e) {
+                throw new YyghException(ResultCodeEnum.FETCH_USERINFO_ERROR);
+            }
+            System.out.println("使用access_token获取用户信息的结果 = " + resultUserInfo);
+
+            JSONObject resultUserInfoJson = JSONObject.parseObject(resultUserInfo);
+            if(resultUserInfoJson.getString("errcode") != null){
+                //log.error("获取用户信息失败：" + resultUserInfoJson.getString("errcode") + resultUserInfoJson.getString("errmsg"));
+                throw new YyghException(ResultCodeEnum.FETCH_USERINFO_ERROR);
+            }
+
+            //解析用户信息
+
+            //用户昵称
+            String nickname = resultUserInfoJson.getString("nickname");
+            //用户头像
+            String headimgurl = resultUserInfoJson.getString("headimgurl");
+
+            //获取扫描人信息添加数据库
+            UserInfo user = new UserInfo();
+            user.setOpenid(openId);
+            user.setNickName(nickname);
+            user.setStatus(1);
+
+            userInfoService.save(user);
         }
-        System.out.println("使用access_token获取用户信息的结果 = " + resultUserInfo);
-
-        JSONObject resultUserInfoJson = JSONObject.parseObject(resultUserInfo);
-        if(resultUserInfoJson.getString("errcode") != null){
-            //log.error("获取用户信息失败：" + resultUserInfoJson.getString("errcode") + resultUserInfoJson.getString("errmsg"));
-            throw new YyghException(ResultCodeEnum.FETCH_USERINFO_ERROR);
-        }
-
-        //解析用户信息
-        String nickname = resultUserInfoJson.getString("nickname");
-        String headimgurl = resultUserInfoJson.getString("headimgurl");
-
-        //获取扫描人信息添加数据库
-        UserInfo userInfo = new UserInfo();
-        userInfo.setOpenid(openId);
-        userInfo.setNickName(nickname);
-        userInfo.setStatus(1);
-        userInfoService.save(userInfo);
-
-        // }
 
         //返回name和token字符串
         Map<String, Object> map = new HashMap<>();
@@ -169,10 +176,11 @@ public class WeixinApiController {
 
         //判断userInfo是否有手机号，如果手机号为空，返回openid
         //如果手机号不为空，返回openid值是空字符串
-        //前端判断：如果openid不为空，绑定手机号，如果openid为空，不需要绑定手机号
         if(StringUtils.isEmpty(userInfo.getPhone())) {
+            //如果openid不为空，绑定手机号
             map.put("openid", userInfo.getOpenid());
         } else {
+            //openid为空，不需要绑定手机号
             map.put("openid", "");
         }
 
@@ -188,4 +196,4 @@ public class WeixinApiController {
 
     }
 
-    }
+}

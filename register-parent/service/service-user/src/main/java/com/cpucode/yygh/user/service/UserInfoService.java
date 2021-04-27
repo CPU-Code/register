@@ -21,4 +21,11 @@ public interface UserInfoService extends IService<UserInfo> {
      */
     Map<String, Object> loginUser(LoginVo loginVo);
 
+    /**
+     * 根据openid判断
+     * @param openid
+     * @return
+     */
+    UserInfo selectWxInfoOpenId(String openid);
+
 }
