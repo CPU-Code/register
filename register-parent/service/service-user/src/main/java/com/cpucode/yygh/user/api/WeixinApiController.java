@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -30,7 +29,6 @@ public class WeixinApiController {
     private UserInfoService userInfoService;
     @Autowired
     private RedisTemplate redisTemplate;
-
 
     /**
      *  生成微信扫描二维码
