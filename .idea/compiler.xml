@@ -17,6 +17,7 @@
         <module name="hospital-manage" />
         <module name="service-util" />
         <module name="vue-yygh-size" />
+        <module name="service-oss" />
         <module name="service-cmn-client" />
       </profile>
     </annotationProcessing>
@@ -33,6 +34,7 @@
       <module name="service-cmn-client" target="1.8" />
       <module name="service-hosp" target="1.8" />
       <module name="service-msm" target="1.8" />
+      <module name="service-oss" target="1.8" />
       <module name="service-user" target="1.8" />
       <module name="service-util" target="1.8" />
       <module name="vue-yygh-size" target="1.5" />
@@ -51,6 +53,7 @@
       <module name="service-cmn-client" options="-parameters" />
       <module name="service-hosp" options="-parameters" />
       <module name="service-msm" options="-parameters" />
+      <module name="service-oss" options="-parameters" />
       <module name="service-user" options="-parameters" />
       <module name="service-util" options="-parameters" />
     </option>
