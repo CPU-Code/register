@@ -1,5 +1,12 @@
 [
   {
+    "name": "weixin-callback",
+    "path": "/weixin/callback",
+    "component": "D:\\\\Date\\\\github\\\\register\\\\vue-yygh-size\\\\pages\\\\weixin\\\\callback.vue",
+    "chunkName": "pages/weixin/callback",
+    "_name": "_05e0e27d"
+  },
+  {
     "name": "hospital-detail-hoscode",
     "path": "/hospital/detail/:hoscode?",
     "component": "D:\\\\Date\\\\github\\\\register\\\\vue-yygh-size\\\\pages\\\\hospital\\\\detail\\\\_hoscode.vue",

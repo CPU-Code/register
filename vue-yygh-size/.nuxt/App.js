@@ -9,10 +9,11 @@ import NuxtBuildIndicator from './components/nuxt-build-indicator'
 import '..\\node_modules\\element-ui\\lib\\theme-chalk\\index.css'
 
 import _6f6c098b from '..\\layouts\\default.vue'
+import _77430317 from '..\\layouts\\empty.vue'
 import _47bf083d from '..\\layouts\\myfooter.vue'
 import _4a95352f from '..\\layouts\\myheader.vue'
 
-const layouts = { "_default": sanitizeComponent(_6f6c098b),"_myfooter": sanitizeComponent(_47bf083d),"_myheader": sanitizeComponent(_4a95352f) }
+const layouts = { "_default": sanitizeComponent(_6f6c098b),"_empty": sanitizeComponent(_77430317),"_myfooter": sanitizeComponent(_47bf083d),"_myheader": sanitizeComponent(_4a95352f) }
 
 export default {
   render (h, props) {

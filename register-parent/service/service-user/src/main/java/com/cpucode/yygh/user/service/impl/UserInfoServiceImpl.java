@@ -44,29 +44,44 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
             throw new YyghException(ResultCodeEnum.PARAM_ERROR);
         }
 
-        //校验校验验证码
+        //判断手机验证码和输入的验证码是否一致
         String mobleCode = redisTemplate.opsForValue().get(phone);
         if(!code.equals(mobleCode)) {
             throw new YyghException(ResultCodeEnum.CODE_ERROR);
         }
 
-        //手机号已被使用
-        QueryWrapper<UserInfo> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("phone", phone);
+        //绑定手机号码
+        UserInfo userInfo = null;
+        if(!StringUtils.isEmpty(loginVo.getOpenid())) {
+            userInfo = this.selectWxInfoOpenId(loginVo.getOpenid());
+            if(null != userInfo) {
+                userInfo.setPhone(loginVo.getPhone());
+                this.updateById(userInfo);
+            } else {
+                throw new YyghException(ResultCodeEnum.DATA_ERROR);
+            }
+        }
 
-        //获取会员
-        UserInfo userInfo = baseMapper.selectOne(queryWrapper);
-
-        //第一次使用这个手机号登录
+        //userInfo=null 说明手机直接登录
         if(null == userInfo) {
-            //添加信息到数据库
-            userInfo = new UserInfo();
+            //判断是否第一次登录：根据手机号查询数据库，如果不存在相同手机号就是第一次登录
+            QueryWrapper<UserInfo> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("phone", phone);
 
-            userInfo.setName("");
-            userInfo.setPhone(phone);
-            userInfo.setStatus(1);
+            //获取会员
+            userInfo = baseMapper.selectOne(queryWrapper);
 
-            this.save(userInfo);
+            //第一次使用这个手机号登录
+            if(null == userInfo) {
+                //添加信息到数据库
+                userInfo = new UserInfo();
+
+                userInfo.setName("");
+                userInfo.setPhone(phone);
+                userInfo.setStatus(1);
+
+                this.save(userInfo);
+            }
         }
 
         //校验是否被禁用

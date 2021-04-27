@@ -23,6 +23,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 微信操作的接口
+ *
  * @author : cpucode
  * @date : 2021/4/26
  * @time : 22:11
@@ -34,8 +36,6 @@ import java.util.Map;
 public class WeixinApiController {
     @Autowired
     private UserInfoService userInfoService;
-    @Autowired
-    private RedisTemplate redisTemplate;
 
     /**
      *  生成微信扫描二维码
@@ -64,7 +64,7 @@ public class WeixinApiController {
     }
 
     /**
-     * 微信登录回调
+     * 微信扫描后回调的方法
      *
      * @param code
      * @param state
@@ -154,12 +154,12 @@ public class WeixinApiController {
             String headimgurl = resultUserInfoJson.getString("headimgurl");
 
             //获取扫描人信息添加数据库
-            UserInfo user = new UserInfo();
-            user.setOpenid(openId);
-            user.setNickName(nickname);
-            user.setStatus(1);
+            userInfo = new UserInfo();
+            userInfo.setOpenid(openId);
+            userInfo.setNickName(nickname);
+            userInfo.setStatus(1);
 
-            userInfoService.save(user);
+            userInfoService.save(userInfo);
         }
 
         //返回name和token字符串

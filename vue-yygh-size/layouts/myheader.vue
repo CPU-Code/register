@@ -4,7 +4,7 @@
       <!-- logo -->
       <div class="left-wrapper v-link selected">
         <img style="width: 50px" width="50" height="50" src="~assets/images/logo.png">
-        <span class="text">网上 预约挂号统一平台</span>
+        <span class="text">网上预约挂号统一平台</span>
       </div>
 
       <!-- 搜索框 -->
@@ -18,8 +18,7 @@
               :fetch-suggestions="querySearchAsync"
               :trigger-on-focus="false"
               @select="handleSelect"
-              placeholder="点击输入医院名称"
-            >
+              placeholder="点击输入医院名称">
               <span slot="suffix" class="search-btn v-link highlight clickable selected">搜索 </span>
             </el-autocomplete>
           </div>
@@ -97,10 +96,11 @@
             </div>
             <div class="bottom wechat" style="margin-top: -80px;">
               <div class="phone-container">
-                <div class="phone-wrapper"  @click="phoneLogin()"><span
-                  class="iconfont icon"></span>
+                <div class="phone-wrapper"  @click="phoneLogin()">
+                  <span class="iconfont icon"></span>
                 </div>
-                <span class="third-text"> 手机短信验证码登录 </span></div>
+                <span class="third-text"> 手机短信验证码登录 </span>
+              </div>
             </div>
           </div>
         </div>
@@ -195,19 +195,18 @@
       document.body.appendChild(script)
 
       // 微信登录回调处理
-/*      let self = this;
+      let self = this;
       window["loginCallback"] = (name,token, openid) => {
         debugger
         self.loginCallback(name, token, openid);
-      }*/
-
+      }
 
     },
 
     methods: {
       loginCallback(name, token, openid) {
         // 打开手机登录层，绑定手机号，改逻辑与手机登录一致
-        if(openid != '') {
+        if(openid == '') {
           this.userInfo.openid = openid
 
           this.showLogin()
@@ -255,10 +254,11 @@
           return;
         }
         this.dialogAtrr.loginBtn = '正在提交...'
-        userInfoApi.login(this.userInfo).then(response => {
-          console.log(response.data)
-          // 登录成功 设置cookie
-          this.setCookies(response.data.name, response.data.token)
+        userInfoApi.login(this.userInfo)
+          .then(response => {
+            console.log(response.data)
+            // 登录成功 设置cookie
+            this.setCookies(response.data.name, response.data.token)
         }).catch(e => {
           this.dialogAtrr.loginBtn = '马上登录'
         })
@@ -267,6 +267,7 @@
       setCookies(name, token) {
         cookie.set('token', token, { domain: 'localhost' })
         cookie.set('name', name, { domain: 'localhost' })
+
         window.location.reload()
       },
 
