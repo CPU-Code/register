@@ -50,7 +50,7 @@ public class FileServiceImpl implements FileService {
         String fileName = file.getOriginalFilename();
         //生成随机唯一值，使用uuid，添加到文件名称里面
         String uuid = UUID.randomUUID().toString().replaceAll("-","");
-        fileName = uuid+fileName;
+        fileName = uuid + fileName;
         //按照当前日期，创建文件夹，上传到创建文件夹里面
         //  2021/02/02/01.jpg
         String timeUrl = new DateTime().toString("yyyy/MM/dd");

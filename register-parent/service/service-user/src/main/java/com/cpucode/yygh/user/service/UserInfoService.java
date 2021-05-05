@@ -3,6 +3,7 @@ package com.cpucode.yygh.user.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.cpucode.yygh.model.user.UserInfo;
 import com.cpucode.yygh.vo.user.LoginVo;
+import com.cpucode.yygh.vo.user.UserAuthVo;
 
 import java.util.Map;
 
@@ -27,5 +28,12 @@ public interface UserInfoService extends IService<UserInfo> {
      * @return
      */
     UserInfo selectWxInfoOpenId(String openid);
+
+    /**
+     * 用户认证
+     * @param userId
+     * @param userAuthVo
+     */
+    void userAuth(Long userId, UserAuthVo userAuthVo);
 
 }
