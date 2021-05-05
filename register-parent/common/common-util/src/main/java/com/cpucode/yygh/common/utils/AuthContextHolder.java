@@ -26,6 +26,7 @@ public class AuthContextHolder {
 
         //jwt从token获取userid
         Long userId = JwtHelper.getUserId(token);
+        return userId;
     }
 
     /**
@@ -39,7 +40,6 @@ public class AuthContextHolder {
 
         //jwt从token获取userid
         String userName = JwtHelper.getUserName(token);
-
         return userName;
     }
 }
