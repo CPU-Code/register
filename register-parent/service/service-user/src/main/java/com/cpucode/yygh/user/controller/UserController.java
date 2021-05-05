@@ -29,6 +29,7 @@ public class UserController {
 
     /**
      * 用户列表（条件查询带分页）
+     *
      * @param page
      * @param limit
      * @param userInfoQueryVo
@@ -47,6 +48,7 @@ public class UserController {
 
     /**
      * 用户锁定
+     *
      * @param userId
      * @param status
      * @return
@@ -58,5 +60,17 @@ public class UserController {
         userInfoService.lock(userId, status);
 
         return Result.ok();
+    }
+
+    /**
+     * 用户详情
+     * @param userId
+     * @return
+     */
+    @GetMapping("show/{userId}")
+    public Result show(@PathVariable Long userId) {
+        Map<String, Object> map = userInfoService.show(userId);
+
+        return Result.ok(map);
     }
 }

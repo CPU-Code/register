@@ -8,8 +8,10 @@ import com.cpucode.yygh.common.exception.YyghException;
 import com.cpucode.yygh.common.helper.JwtHelper;
 import com.cpucode.yygh.common.result.ResultCodeEnum;
 import com.cpucode.yygh.enums.AuthStatusEnum;
+import com.cpucode.yygh.model.user.Patient;
 import com.cpucode.yygh.model.user.UserInfo;
 import com.cpucode.yygh.user.mapper.UserInfoMapper;
+import com.cpucode.yygh.user.service.PatientService;
 import com.cpucode.yygh.user.service.UserInfoService;
 import com.cpucode.yygh.vo.user.LoginVo;
 import com.cpucode.yygh.vo.user.UserAuthVo;
@@ -20,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -34,6 +37,9 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
 
     @Autowired
     private RedisTemplate<String,String> redisTemplate;
+
+    @Autowired
+    private PatientService patientService;
 
     /**
      * 会员登录
@@ -218,6 +224,26 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
 
             baseMapper.updateById(userInfo);
         }
+    }
+
+    /**
+     * 用户详情
+     * @param userId
+     * @return
+     */
+    @Override
+    public Map<String, Object> show(Long userId) {
+        Map<String,Object> map = new HashMap<>();
+
+        //根据userid查询用户信息
+        UserInfo userInfo = this.packageUserInfo(baseMapper.selectById(userId));
+        map.put("userInfo", userInfo);
+
+        //根据userid查询就诊人信息
+        List<Patient> patientList = patientService.findAllUserId(userId);
+        map.put("patientList", patientList);
+
+        return map;
     }
 
     /**
