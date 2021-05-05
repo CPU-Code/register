@@ -45,4 +45,18 @@ public class UserController {
         return Result.ok(pageModel);
     }
 
+    /**
+     * 用户锁定
+     * @param userId
+     * @param status
+     * @return
+     */
+    @ApiOperation(value = "锁定")
+    @GetMapping("lock/{userId}/{status}")
+    public Result lock(@PathVariable Long userId,
+                       @PathVariable Integer status) {
+        userInfoService.lock(userId, status);
+
+        return Result.ok();
+    }
 }

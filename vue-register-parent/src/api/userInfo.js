@@ -10,5 +10,13 @@ export default {
       method: 'get',
       params: searchObj
     })
+  },
+  //用户锁定
+  lock(id, status) {
+    return request({
+      url: `${api_name}/lock/${id}/${status}`,
+      method: 'get'
+    })
   }
+
 }
