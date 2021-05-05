@@ -3,42 +3,56 @@
     "name": "patient",
     "path": "/patient",
     "component": "D:\\\\Date\\\\github\\\\register\\\\vue-yygh-size\\\\pages\\\\patient\\\\index.vue",
-    "chunkName": "pages/patient/index"
+    "chunkName": "pages/patient/index",
+    "_name": "_363ee3fa"
   },
   {
     "name": "user",
     "path": "/user",
     "component": "D:\\\\Date\\\\github\\\\register\\\\vue-yygh-size\\\\pages\\\\user\\\\index.vue",
-    "chunkName": "pages/user/index"
+    "chunkName": "pages/user/index",
+    "_name": "_26fe807e"
+  },
+  {
+    "name": "patient-add",
+    "path": "/patient/add",
+    "component": "D:\\\\Date\\\\github\\\\register\\\\vue-yygh-size\\\\pages\\\\patient\\\\add.vue",
+    "chunkName": "pages/patient/add",
+    "_name": "_61747092"
   },
   {
     "name": "weixin-callback",
     "path": "/weixin/callback",
     "component": "D:\\\\Date\\\\github\\\\register\\\\vue-yygh-size\\\\pages\\\\weixin\\\\callback.vue",
-    "chunkName": "pages/weixin/callback"
+    "chunkName": "pages/weixin/callback",
+    "_name": "_05e0e27d"
   },
   {
     "name": "hospital-detail-hoscode",
     "path": "/hospital/detail/:hoscode?",
     "component": "D:\\\\Date\\\\github\\\\register\\\\vue-yygh-size\\\\pages\\\\hospital\\\\detail\\\\_hoscode.vue",
-    "chunkName": "pages/hospital/detail/_hoscode"
+    "chunkName": "pages/hospital/detail/_hoscode",
+    "_name": "_1129b71b"
   },
   {
     "name": "hospital-notice-hoscode",
     "path": "/hospital/notice/:hoscode?",
     "component": "D:\\\\Date\\\\github\\\\register\\\\vue-yygh-size\\\\pages\\\\hospital\\\\notice\\\\_hoscode.vue",
-    "chunkName": "pages/hospital/notice/_hoscode"
+    "chunkName": "pages/hospital/notice/_hoscode",
+    "_name": "_25f0853c"
   },
   {
     "name": "hospital-hoscode",
     "path": "/hospital/:hoscode?",
     "component": "D:\\\\Date\\\\github\\\\register\\\\vue-yygh-size\\\\pages\\\\hospital\\\\_hoscode.vue",
-    "chunkName": "pages/hospital/_hoscode"
+    "chunkName": "pages/hospital/_hoscode",
+    "_name": "_a83ba5ec"
   },
   {
     "name": "index",
     "path": "/",
     "component": "D:\\\\Date\\\\github\\\\register\\\\vue-yygh-size\\\\pages\\\\index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_59754d6c"
   }
 ]
