@@ -21,6 +21,13 @@
     "_name": "_61747092"
   },
   {
+    "name": "patient-show",
+    "path": "/patient/show",
+    "component": "D:\\\\Date\\\\github\\\\register\\\\vue-yygh-size\\\\pages\\\\patient\\\\show.vue",
+    "chunkName": "pages/patient/show",
+    "_name": "_0531045c"
+  },
+  {
     "name": "weixin-callback",
     "path": "/weixin/callback",
     "component": "D:\\\\Date\\\\github\\\\register\\\\vue-yygh-size\\\\pages\\\\weixin\\\\callback.vue",
