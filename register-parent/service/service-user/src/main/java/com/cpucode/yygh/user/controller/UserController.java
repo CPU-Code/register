@@ -1,14 +1,15 @@
 package com.cpucode.yygh.user.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cpucode.yygh.common.result.Result;
+import com.cpucode.yygh.model.user.UserInfo;
 import com.cpucode.yygh.user.service.UserInfoService;
 import com.cpucode.yygh.vo.user.LoginVo;
+import com.cpucode.yygh.vo.user.UserInfoQueryVo;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -25,5 +26,23 @@ import java.util.Map;
 public class UserController {
     @Autowired
     private UserInfoService userInfoService;
+
+    /**
+     * 用户列表（条件查询带分页）
+     * @param page
+     * @param limit
+     * @param userInfoQueryVo
+     * @return
+     */
+    @GetMapping("{page}/{limit}")
+    public Result list(@PathVariable Long page,
+                       @PathVariable Long limit,
+                       UserInfoQueryVo userInfoQueryVo) {
+        Page<UserInfo> pageParam = new Page<>(page, limit);
+        IPage<UserInfo> pageModel =
+                userInfoService.selectPage(pageParam, userInfoQueryVo);
+
+        return Result.ok(pageModel);
+    }
 
 }
