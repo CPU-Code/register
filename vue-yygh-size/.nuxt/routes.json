@@ -1,5 +1,12 @@
 [
   {
+    "name": "user",
+    "path": "/user",
+    "component": "D:\\\\Date\\\\github\\\\register\\\\vue-yygh-size\\\\pages\\\\user\\\\index.vue",
+    "chunkName": "pages/user/index",
+    "_name": "_26fe807e"
+  },
+  {
     "name": "weixin-callback",
     "path": "/weixin/callback",
     "component": "D:\\\\Date\\\\github\\\\register\\\\vue-yygh-size\\\\pages\\\\weixin\\\\callback.vue",
