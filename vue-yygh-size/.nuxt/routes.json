@@ -1,44 +1,44 @@
 [
   {
+    "name": "patient",
+    "path": "/patient",
+    "component": "D:\\\\Date\\\\github\\\\register\\\\vue-yygh-size\\\\pages\\\\patient\\\\index.vue",
+    "chunkName": "pages/patient/index"
+  },
+  {
     "name": "user",
     "path": "/user",
     "component": "D:\\\\Date\\\\github\\\\register\\\\vue-yygh-size\\\\pages\\\\user\\\\index.vue",
-    "chunkName": "pages/user/index",
-    "_name": "_26fe807e"
+    "chunkName": "pages/user/index"
   },
   {
     "name": "weixin-callback",
     "path": "/weixin/callback",
     "component": "D:\\\\Date\\\\github\\\\register\\\\vue-yygh-size\\\\pages\\\\weixin\\\\callback.vue",
-    "chunkName": "pages/weixin/callback",
-    "_name": "_05e0e27d"
+    "chunkName": "pages/weixin/callback"
   },
   {
     "name": "hospital-detail-hoscode",
     "path": "/hospital/detail/:hoscode?",
     "component": "D:\\\\Date\\\\github\\\\register\\\\vue-yygh-size\\\\pages\\\\hospital\\\\detail\\\\_hoscode.vue",
-    "chunkName": "pages/hospital/detail/_hoscode",
-    "_name": "_1129b71b"
+    "chunkName": "pages/hospital/detail/_hoscode"
   },
   {
     "name": "hospital-notice-hoscode",
     "path": "/hospital/notice/:hoscode?",
     "component": "D:\\\\Date\\\\github\\\\register\\\\vue-yygh-size\\\\pages\\\\hospital\\\\notice\\\\_hoscode.vue",
-    "chunkName": "pages/hospital/notice/_hoscode",
-    "_name": "_25f0853c"
+    "chunkName": "pages/hospital/notice/_hoscode"
   },
   {
     "name": "hospital-hoscode",
     "path": "/hospital/:hoscode?",
     "component": "D:\\\\Date\\\\github\\\\register\\\\vue-yygh-size\\\\pages\\\\hospital\\\\_hoscode.vue",
-    "chunkName": "pages/hospital/_hoscode",
-    "_name": "_a83ba5ec"
+    "chunkName": "pages/hospital/_hoscode"
   },
   {
     "name": "index",
     "path": "/",
     "component": "D:\\\\Date\\\\github\\\\register\\\\vue-yygh-size\\\\pages\\\\index.vue",
-    "chunkName": "pages/index",
-    "_name": "_59754d6c"
+    "chunkName": "pages/index"
   }
 ]
