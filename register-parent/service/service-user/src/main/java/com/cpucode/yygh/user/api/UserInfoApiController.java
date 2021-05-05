@@ -2,15 +2,13 @@ package com.cpucode.yygh.user.api;
 
 import com.cpucode.yygh.common.result.Result;
 import com.cpucode.yygh.common.utils.AuthContextHolder;
+import com.cpucode.yygh.model.user.UserInfo;
 import com.cpucode.yygh.user.service.UserInfoService;
 import com.cpucode.yygh.vo.user.LoginVo;
 import com.cpucode.yygh.vo.user.UserAuthVo;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -54,4 +52,20 @@ public class UserInfoApiController {
 
         return Result.ok();
     }
+
+    /**
+     * 获取用户id信息接口
+     * @param request
+     * @return
+     */
+    @GetMapping("auth/getUserInfo")
+    public Result getUserInfo(HttpServletRequest request) {
+        //获取当前用户id
+        Long userId = AuthContextHolder.getUserId(request);
+        //根据 ID 查询用户信息
+        UserInfo userInfo = userInfoService.getById(userId);
+
+        return Result.ok(userInfo);
+    }
+
 }
