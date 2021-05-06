@@ -73,4 +73,18 @@ public class UserController {
 
         return Result.ok(map);
     }
+
+    /**
+     * 认证审批
+     * @param userId
+     * @param authStatus
+     * @return
+     */
+    @GetMapping("approval/{userId}/{authStatus}")
+    public Result approval(@PathVariable Long userId,
+                           @PathVariable Integer authStatus){
+        userInfoService.approval(userId, authStatus);
+
+        return Result.ok();
+    }
 }

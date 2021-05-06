@@ -247,6 +247,21 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
     }
 
     /**
+     * 认证审批  2通过  -1不通过
+     * @param userId
+     * @param authStatus
+     */
+    @Override
+    public void approval(Long userId, Integer authStatus) {
+        if(authStatus.intValue() ==2 || authStatus.intValue() == -1) {
+            UserInfo userInfo = baseMapper.selectById(userId);
+            userInfo.setAuthStatus(authStatus);
+
+            baseMapper.updateById(userInfo);
+        }
+    }
+
+    /**
      * 编号变成对应值封装
      * @param userInfo
      * @return
