@@ -4,6 +4,7 @@ import com.cloopen.rest.sdk.BodyType;
 import com.cloopen.rest.sdk.CCPRestSmsSDK;
 import com.cpucode.yygh.msm.service.MsmService;
 
+import com.cpucode.yygh.vo.msm.MsmVo;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -69,6 +70,23 @@ public class MsmServiceImpl implements MsmService {
             return false;
         }
     }
+
+    /**
+     * mq使用发送短信
+     * @param msmVo
+     * @return
+     */
+    @Override
+    public boolean send(MsmVo msmVo) {
+        if(!StringUtils.isEmpty(msmVo.getPhone())) {
+            String code = (String)msmVo.getParam().get("code");
+
+            return this.send(msmVo.getPhone(), code);
+        }
+
+        return false;
+    }
+
 
 }
 

@@ -13,10 +13,10 @@ import org.springframework.context.annotation.ComponentScan;
  * @github : https://github.com/CPU-Code
  * @csdn : https://blog.csdn.net/qq_44226094
  */
-@ComponentScan(basePackages = "com.cpucode")
-@EnableFeignClients(basePackages = "com.cpucode")
 @SpringBootApplication
+@ComponentScan(basePackages = {"com.cpucode"})
 @EnableDiscoveryClient
+@EnableFeignClients(basePackages = {"com.cpucode"})
 public class ServiceOrderApplication {
     public static void main(String[] args) {
         SpringApplication.run(ServiceOrderApplication.class, args);

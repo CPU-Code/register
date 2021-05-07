@@ -1,5 +1,7 @@
 package com.cpucode.yygh.msm.service;
 
+import com.cpucode.yygh.vo.msm.MsmVo;
+
 /**
  * @author : cpucode
  * @date : 2021/4/26
@@ -16,4 +18,10 @@ public interface MsmService {
      */
     boolean send(String phone, String code);
 
+    /**
+     * mq使用发送短信
+     * @param msmVo
+     * @return
+     */
+    boolean send(MsmVo msmVo);
 }
