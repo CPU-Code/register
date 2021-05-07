@@ -453,4 +453,16 @@ public class ScheduleServiceImpl implements ScheduleService {
 
         return dateTime;
     }
+
+    /**
+     * 获取排班id获取排班数据
+     * @param id
+     * @return
+     */
+    @Override
+    public Schedule getById(String id) {
+        Schedule schedule = scheduleRepository.findById(id).get();
+        return this.packageSchedule(schedule);
+    }
+
 }
