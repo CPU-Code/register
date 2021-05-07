@@ -1,6 +1,7 @@
 package com.cpucode.yygh.hosp.service;
 
 import com.cpucode.yygh.model.hosp.Schedule;
+import com.cpucode.yygh.vo.hosp.ScheduleOrderVo;
 import com.cpucode.yygh.vo.hosp.ScheduleQueryVo;
 import org.springframework.data.domain.Page;
 
@@ -72,4 +73,11 @@ public interface ScheduleService {
      * @return
      */
     Schedule getById(String id);
+
+    /**
+     * 根据排班id获取预约下单数据
+     * @param scheduleId
+     * @return
+     */
+    ScheduleOrderVo getScheduleOrderVo(String scheduleId);
 }

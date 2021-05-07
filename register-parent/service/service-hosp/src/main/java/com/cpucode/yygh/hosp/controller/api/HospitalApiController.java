@@ -7,6 +7,7 @@ import com.cpucode.yygh.hosp.service.ScheduleService;
 import com.cpucode.yygh.model.hosp.Hospital;
 import com.cpucode.yygh.vo.hosp.DepartmentVo;
 import com.cpucode.yygh.vo.hosp.HospitalQueryVo;
+import com.cpucode.yygh.vo.hosp.ScheduleOrderVo;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -155,5 +156,19 @@ public class HospitalApiController {
             @PathVariable String scheduleId) {
         return Result.ok(scheduleService.getById(scheduleId));
     }
+
+    /**
+     * 根据排班id获取预约下单数据
+     * @param scheduleId
+     * @return
+     */
+    @ApiOperation(value = "根据排班id获取预约下单数据")
+    @GetMapping("inner/getScheduleOrderVo/{scheduleId}")
+    public ScheduleOrderVo getScheduleOrderVo(
+            @ApiParam(name = "scheduleId", value = "排班id", required = true)
+            @PathVariable("scheduleId") String scheduleId) {
+        return scheduleService.getScheduleOrderVo(scheduleId);
+    }
+
 
 }
