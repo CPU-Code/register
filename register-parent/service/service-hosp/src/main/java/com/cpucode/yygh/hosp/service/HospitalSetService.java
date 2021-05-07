@@ -2,6 +2,7 @@ package com.cpucode.yygh.hosp.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.cpucode.yygh.model.hosp.HospitalSet;
+import com.cpucode.yygh.vo.order.SignInfoVo;
 
 /**
  * @author : cpucode
@@ -17,4 +18,11 @@ public interface HospitalSetService extends IService<HospitalSet> {
      * @return
      */
     String getSignKey(String hoscode);
+
+    /**
+     * 获取医院签名信息
+     * @param hoscode
+     * @return
+     */
+    SignInfoVo getSignInfoVo(String hoscode);
 }

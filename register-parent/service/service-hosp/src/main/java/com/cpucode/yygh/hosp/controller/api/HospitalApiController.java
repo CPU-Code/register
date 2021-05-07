@@ -3,11 +3,13 @@ package com.cpucode.yygh.hosp.controller.api;
 import com.cpucode.yygh.common.result.Result;
 import com.cpucode.yygh.hosp.service.DepartmentService;
 import com.cpucode.yygh.hosp.service.HospitalService;
+import com.cpucode.yygh.hosp.service.HospitalSetService;
 import com.cpucode.yygh.hosp.service.ScheduleService;
 import com.cpucode.yygh.model.hosp.Hospital;
 import com.cpucode.yygh.vo.hosp.DepartmentVo;
 import com.cpucode.yygh.vo.hosp.HospitalQueryVo;
 import com.cpucode.yygh.vo.hosp.ScheduleOrderVo;
+import com.cpucode.yygh.vo.order.SignInfoVo;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +40,9 @@ public class HospitalApiController {
 
     @Autowired
     private ScheduleService scheduleService;
+
+    @Autowired
+    private HospitalSetService hospitalSetService;
 
     /**
      * 查询医院列表
@@ -170,5 +175,17 @@ public class HospitalApiController {
         return scheduleService.getScheduleOrderVo(scheduleId);
     }
 
+    /**
+     * 获取医院签名信息
+     * @param hoscode
+     * @return
+     */
+    @ApiOperation(value = "获取医院签名信息")
+    @GetMapping("inner/getSignInfoVo/{hoscode}")
+    public SignInfoVo getSignInfoVo(
+            @ApiParam(name = "hoscode", value = "医院code", required = true)
+            @PathVariable("hoscode") String hoscode) {
+        return hospitalSetService.getSignInfoVo(hoscode);
+    }
 
 }
