@@ -7,19 +7,20 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="service-user" />
-        <module name="service-hosp" />
         <module name="common-util" />
         <module name="service-order" />
-        <module name="service-msm" />
-        <module name="server-gateway" />
-        <module name="model" />
-        <module name="service-cmn" />
         <module name="hospital-manage" />
-        <module name="service-util" />
+        <module name="service-cmn" />
         <module name="vue-yygh-size" />
-        <module name="service-oss" />
+        <module name="service-util" />
         <module name="service-cmn-client" />
+        <module name="service-oss" />
+        <module name="service-user" />
+        <module name="service-user-client" />
+        <module name="service-msm" />
+        <module name="model" />
+        <module name="service-hosp" />
+        <module name="server-gateway" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -38,6 +39,7 @@
       <module name="service-order" target="1.8" />
       <module name="service-oss" target="1.8" />
       <module name="service-user" target="1.8" />
+      <module name="service-user-client" target="1.8" />
       <module name="service-util" target="1.8" />
       <module name="vue-yygh-size" target="1.5" />
     </bytecodeTargetLevel>
@@ -58,6 +60,7 @@
       <module name="service-order" options="-parameters" />
       <module name="service-oss" options="-parameters" />
       <module name="service-user" options="-parameters" />
+      <module name="service-user-client" options="-parameters" />
       <module name="service-util" options="-parameters" />
     </option>
   </component>

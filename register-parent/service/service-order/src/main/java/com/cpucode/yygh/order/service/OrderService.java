@@ -11,4 +11,12 @@ import com.cpucode.yygh.model.order.OrderInfo;
  * @csdn : https://blog.csdn.net/qq_44226094
  */
 public interface OrderService extends IService<OrderInfo> {
+    /**
+     * 保存订单
+     * @param scheduleId
+     * @param patientId
+     * @return
+     */
+    Long saveOrder(String scheduleId, Long patientId);
+
 }
