@@ -14,6 +14,13 @@
     "_name": "_26fe807e"
   },
   {
+    "name": "hospital-schedule",
+    "path": "/hospital/schedule",
+    "component": "D:\\\\Date\\\\github\\\\register\\\\vue-yygh-size\\\\pages\\\\hospital\\\\schedule.vue",
+    "chunkName": "pages/hospital/schedule",
+    "_name": "_4678c627"
+  },
+  {
     "name": "patient-add",
     "path": "/patient/add",
     "component": "D:\\\\Date\\\\github\\\\register\\\\vue-yygh-size\\\\pages\\\\patient\\\\add.vue",

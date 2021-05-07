@@ -64,6 +64,4 @@ public class ScheduleController {
 
         return Result.ok(list);
     }
-
-
 }

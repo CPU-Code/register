@@ -1,10 +1,7 @@
 package com.cpucode.yygh.model.hosp;
 
 import com.alibaba.fastjson.JSONObject;
-import com.cpucode.yygh.model.base.BaseEntity;
 import com.cpucode.yygh.model.base.BaseMongoEntity;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

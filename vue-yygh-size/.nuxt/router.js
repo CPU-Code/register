@@ -6,6 +6,7 @@ import scrollBehavior from './router.scrollBehavior.js'
 
 const _363ee3fa = () => interopDefault(import('..\\pages\\patient\\index.vue' /* webpackChunkName: "pages/patient/index" */))
 const _26fe807e = () => interopDefault(import('..\\pages\\user\\index.vue' /* webpackChunkName: "pages/user/index" */))
+const _4678c627 = () => interopDefault(import('..\\pages\\hospital\\schedule.vue' /* webpackChunkName: "pages/hospital/schedule" */))
 const _61747092 = () => interopDefault(import('..\\pages\\patient\\add.vue' /* webpackChunkName: "pages/patient/add" */))
 const _0531045c = () => interopDefault(import('..\\pages\\patient\\show.vue' /* webpackChunkName: "pages/patient/show" */))
 const _05e0e27d = () => interopDefault(import('..\\pages\\weixin\\callback.vue' /* webpackChunkName: "pages/weixin/callback" */))
@@ -33,6 +34,10 @@ export const routerOptions = {
     path: "/user",
     component: _26fe807e,
     name: "user"
+  }, {
+    path: "/hospital/schedule",
+    component: _4678c627,
+    name: "hospital-schedule"
   }, {
     path: "/patient/add",
     component: _61747092,

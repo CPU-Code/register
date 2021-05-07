@@ -56,4 +56,13 @@ public interface ScheduleService {
      */
     List<Schedule> getDetailSchedule(String hoscode, String depcode, String workDate);
 
+    /**
+     * 获取可预约的排班数据
+     * @param page
+     * @param limit
+     * @param hoscode
+     * @param depcode
+     * @return
+     */
+    Map<String,Object> getBookingScheduleRule(int page,int limit,String hoscode,String depcode);
 }
