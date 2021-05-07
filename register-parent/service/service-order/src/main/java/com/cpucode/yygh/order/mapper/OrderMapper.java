@@ -10,5 +10,5 @@ import com.cpucode.yygh.model.order.OrderInfo;
  * @github : https://github.com/CPU-Code
  * @csdn : https://blog.csdn.net/qq_44226094
  */
-public interface OrderInfoMapper extends BaseMapper<OrderInfo> {
+public interface OrderMapper extends BaseMapper<OrderInfo> {
 }

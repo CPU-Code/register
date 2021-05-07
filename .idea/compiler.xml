@@ -22,6 +22,7 @@
         <module name="model" />
         <module name="service-hosp" />
         <module name="server-gateway" />
+        <module name="rabbit-util" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -29,6 +30,7 @@
       <module name="common-util" target="1.8" />
       <module name="hospital-manage" target="1.8" />
       <module name="model" target="1.8" />
+      <module name="rabbit-util" target="1.8" />
       <module name="register-parent" target="1.8" />
       <module name="server-gateway" target="1.8" />
       <module name="service" target="1.8" />
@@ -52,6 +54,7 @@
       <module name="common-util" options="-parameters" />
       <module name="hospital-manage" options="-parameters" />
       <module name="model" options="-parameters" />
+      <module name="rabbit-util" options="-parameters" />
       <module name="register-parent" options="" />
       <module name="server-gateway" options="-parameters" />
       <module name="service-client" options="-parameters" />

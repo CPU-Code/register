@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/register-parent/common/common-util/common-util.iml" filepath="$PROJECT_DIR$/register-parent/common/common-util/common-util.iml" />
       <module fileurl="file://$PROJECT_DIR$/register-parent/hospital-manage/hospital-manage.iml" filepath="$PROJECT_DIR$/register-parent/hospital-manage/hospital-manage.iml" />
       <module fileurl="file://$PROJECT_DIR$/register-parent/model/model.iml" filepath="$PROJECT_DIR$/register-parent/model/model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/register-parent/common/rabbit-util/rabbit-util.iml" filepath="$PROJECT_DIR$/register-parent/common/rabbit-util/rabbit-util.iml" />
       <module fileurl="file://$PROJECT_DIR$/register-parent/register-parent.iml" filepath="$PROJECT_DIR$/register-parent/register-parent.iml" />
       <module fileurl="file://$PROJECT_DIR$/register-parent/server-gateway/server-gateway.iml" filepath="$PROJECT_DIR$/register-parent/server-gateway/server-gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/register-parent/service/service.iml" filepath="$PROJECT_DIR$/register-parent/service/service.iml" />

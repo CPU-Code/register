@@ -9,7 +9,7 @@ import com.cpucode.yygh.enums.OrderStatusEnum;
 import com.cpucode.yygh.hosp.client.HospitalFeignClient;
 import com.cpucode.yygh.model.order.OrderInfo;
 import com.cpucode.yygh.model.user.Patient;
-import com.cpucode.yygh.order.mapper.OrderInfoMapper;
+import com.cpucode.yygh.order.mapper.OrderMapper;
 import com.cpucode.yygh.order.service.OrderService;
 import com.cpucode.yygh.user.client.PatientFeignClient;
 import com.cpucode.yygh.vo.hosp.ScheduleOrderVo;
@@ -31,14 +31,12 @@ import java.util.Random;
  * @csdn : https://blog.csdn.net/qq_44226094
  */
 @Service
-public class OrderServiceImpl extends
-        ServiceImpl<OrderInfoMapper, OrderInfo> implements OrderService {
+public class OrderServiceImpl extends ServiceImpl<OrderMapper, OrderInfo> implements OrderService {
 
     @Autowired
     private PatientFeignClient patientFeignClient;
     @Autowired
     private HospitalFeignClient hospitalFeignClient;
-
 
     /**
      * 保存订单
@@ -154,8 +152,11 @@ public class OrderServiceImpl extends
         } else {
             throw new YyghException(result.getString("message"), ResultCodeEnum.FAIL.getCode());
         }
-        return orderInfo.getId();
 
+        return orderInfo.getId();
     }
 
 }
+
+
+
