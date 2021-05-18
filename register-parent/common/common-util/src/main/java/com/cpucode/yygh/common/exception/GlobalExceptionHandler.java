@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
+ * 全局异常处理类
  * @author : cpucode
  * @date : 2021/4/13
  * @time : 23:31
@@ -21,6 +22,11 @@ public class GlobalExceptionHandler {
         return Result.fail();
     }
 
+    /**
+     * 自定义异常处理方法
+     * @param e
+     * @return
+     */
     @ExceptionHandler(YyghException.class)
     @ResponseBody
     public Result error(YyghException e) {
