@@ -24,7 +24,7 @@ public class HttpRequestHelper {
     }
 
     /**
-     *
+     * 添加帮助类
      * @param paramMap
      * @return
      */

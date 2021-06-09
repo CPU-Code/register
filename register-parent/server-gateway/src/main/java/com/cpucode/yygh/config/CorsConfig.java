@@ -9,6 +9,7 @@ import org.springframework.web.util.pattern.PathPatternParser;
 
 /**
  * 处理跨域
+ * 全局配置类实现
  * @author : cpucode
  * @date : 2021/4/23
  * @time : 13:26
